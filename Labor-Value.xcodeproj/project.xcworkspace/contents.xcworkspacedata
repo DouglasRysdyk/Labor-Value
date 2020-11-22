@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:What It&#x2019;s Worth Work Notes.rtf">
+   </FileRef>
+   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>
