@@ -23,8 +23,8 @@ class MainViewController: UIViewController {
         let incomeString = incomeTextfield.text ?? "0"
         let itemPriceString = itemPriceTextfield.text ?? "0"
         
-        let theIncome = Int(incomeString) ?? 0
-        let theItemPrice = Int(itemPriceString) ?? 0
+        let theIncome = Double(incomeString) ?? 0
+        let theItemPrice = Double(itemPriceString) ?? 0
         
         let theResult = theCalculationsModel.hoursToWork(itemPrice: theItemPrice, hourlyIncome: theIncome)
         //TODO: Make the label's dispaly an int or double depending on calculation result.
@@ -32,6 +32,8 @@ class MainViewController: UIViewController {
         
         resultLabel.text = String(theResult)
     }
+    
+    
     
     /*
     // MARK: Navigation

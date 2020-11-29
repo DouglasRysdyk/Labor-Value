@@ -8,26 +8,20 @@
 import Foundation
 
 class Calculations {
-    func hoursToWork(itemPrice: Int, hourlyIncome: Int) -> Int {
-        let theResult = itemPrice / hourlyIncome
-        
-        //TODO: Make theResult a double.  
+    func hoursToWork(itemPrice: Double, hourlyIncome: Double) -> Double {
+        let theResult: Double = itemPrice / hourlyIncome
         
         return theResult
     }
-    
-    
 }
 
 /*
  - Income / unit of time = Income per unit of time
 
- //TODO: Add calculations for hours to seconds, minutes, days, weeks, months, years
- 
- - Seconds in a minute = 60
- - Seconds in an hour = 3600
- - Minutes in an hour = 60
- - Hours in a day = 24
- - Hours in a month = 730.5
- - Hours in a year = 8,766
+ - SECONDS in an hour = 3600
+ - MINUTES in an hour = 60
+ - Hours in a DAY = 24
+ - Hours in WEEK = 168
+ - Hours in a MONTH = 730.5
+ - Hours in a YEAR = 8,766
 */

@@ -27,29 +27,21 @@
 \f1\b0 \ulnone  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0
 \cf0 \ul TODO:\ulnone  \
-- User types in pay and chooses Hourly.  \
-  - Look into this.  Logically work through what should happen here.  \
-    - What will make the most sense feedback wise?  \
-    - What will make sense visually?  \
-- The user types in the item's cost.  \
-- User presses Find Out button.  \
-  - The user's income and the item's cost are converted into Ints.  \
-  - The result is calculated (check if your equation makes sense).  \
-  - The item's cost is converted back into a String and printed in the console.  \
-- Commit changes.  \
-\
-- User has a Salary income.  \
-  - What equation do I use to convert a salary income to hourly?  \
-    - Is this the right thing to do?  \
-- Repeat of last time: \
-  - The user types in the item's cost.  \
-  - User presses Find Out button.  \
-    - The user's income and the item's cost are converted into Ints.  \
-    - The result is calculated (check if your equation makes sense).  \
-    - The item's cost is converted back into a String and printed in the console.  \
-- Commit changes.  \
-\
-- Display the Result on the next screen's label.  \
+- How to make the function accept a double or an int?  \
+  - Come to think of it this may be a non-issue.  \
+- If the user enters zero throw some kind of an error.  \
+  - What kind of error?  What label changes?  This is mostly a design problem.  \
+- Do Stanford calculator thing.  \
+  - Answers are doubles.  \
+  - Result label can be a double or an int depending on whether or not the answer ends in a zero.  \
+- Flesh out the result.  \
+  - Make it look like "It'll take X many hours to pay for this."  \
+  - I'll worry about a single hour later.  \
+    - "It'll take one hour to pay for this."\
+- Add extra calculations.  \
+  - All results are in hours, but I want to show seconds, minutes, days, weeks, months, and years from that result.  \
+  - For testing I'll add buttons that change the result's answer.  \
+- Make the program more type safe (public, private, let, var, etc.) \
  \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0
 \ls1\ilvl0\cf0 - 
