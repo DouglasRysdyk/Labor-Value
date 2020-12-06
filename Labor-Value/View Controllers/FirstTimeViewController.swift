@@ -8,6 +8,12 @@
 import UIKit
 
 class FirstTimeViewController: UIViewController {
+    //TODO:
+    //Add the outlets from the FirstTimeView
+    //When the user presses the save button save this view's data in a persistent container.
+      //Add Core Data entity to contain this data.
+        //What attributes will I be adding?  Should be on screen in the View already.
+        //This means I need to add a connection to the model here and other Core Data set up.  
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +21,6 @@ class FirstTimeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
     /*
     // MARK: - Navigation
 

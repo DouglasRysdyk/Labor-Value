@@ -8,11 +8,16 @@
 import UIKit
 
 class ResultsViewController: UIViewController {
-
+    var theCalculationsModel: Calculations?
+    
+    @IBOutlet weak var theResult: UILabel!
+    
+    var theResultString = "Error"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        theResult.text = theResultString
     }
     
 
