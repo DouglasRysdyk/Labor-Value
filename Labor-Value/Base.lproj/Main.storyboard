@@ -132,6 +132,10 @@
                                 <rect key="frame" x="147" y="367" width="121" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add Another Item"/>
+                                <connections>
+                                    <action selector="addAnotherItem:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gPh-dX-V1o"/>
+                                    <segue destination="J0R-gO-xLm" kind="show" id="Wpb-YW-IsJ"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="$" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TfR-Vf-xgO">
                                 <rect key="frame" x="157" y="258" width="97" height="34"/>
@@ -150,6 +154,9 @@
                                 <rect key="frame" x="190" y="440" width="39" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="reset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CmT-dt-dG2"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="INCOME: For Testing Only" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0zv-9c-0I2">
                                 <rect key="frame" x="38" y="111" width="230" height="34"/>
@@ -180,13 +187,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Result" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wT-Ko-ZbG">
-                                <rect key="frame" x="186" y="411" width="48" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wT-Ko-ZbG">
+                                <rect key="frame" x="20" y="207" width="374" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sb7-MX-aYJ">
+                                <rect key="frame" x="13" y="301" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Seconds"/>
+                                <connections>
+                                    <action selector="hoursToSeconds:" destination="bll-Nv-RSb" eventType="touchUpInside" id="Lhw-bM-DQg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vz6-j8-KVH">
+                                <rect key="frame" x="84" y="301" width="55" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Minutes"/>
+                                <connections>
+                                    <action selector="hoursToMinutes:" destination="bll-Nv-RSb" eventType="touchUpInside" id="98m-Xc-Ag9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Fo-TA-yAX">
+                                <rect key="frame" x="154" y="301" width="41" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Hours"/>
+                                <connections>
+                                    <action selector="displayOriginalNumber:" destination="bll-Nv-RSb" eventType="touchUpInside" id="MTc-8f-Pr1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u8D-Df-nEn">
+                                <rect key="frame" x="207" y="301" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Days"/>
+                                <connections>
+                                    <action selector="hoursToDays:" destination="bll-Nv-RSb" eventType="touchUpInside" id="tW7-6u-NCY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v1A-of-aky">
+                                <rect key="frame" x="249" y="301" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Weeks"/>
+                                <connections>
+                                    <action selector="hoursToWeeks:" destination="bll-Nv-RSb" eventType="touchUpInside" id="ca9-sM-Hv1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Y9-Ut-oOr">
+                                <rect key="frame" x="303" y="301" width="52" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Months"/>
+                                <connections>
+                                    <action selector="hoursToMonths:" destination="bll-Nv-RSb" eventType="touchUpInside" id="A7H-pb-XHc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCO-hx-w9G">
+                                <rect key="frame" x="363" y="301" width="38" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Years"/>
+                                <connections>
+                                    <action selector="hoursToYears:" destination="bll-Nv-RSb" eventType="touchUpInside" id="bex-mG-kUj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4TJ-N3-cee"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -198,7 +261,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXe-sn-5oV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2601" y="88"/>
+            <point key="canvasLocation" x="2598.5507246376815" y="87.723214285714278"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="J9k-Dm-9OJ">
@@ -238,6 +301,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nlC-wz-jPR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="113.04347826086958" y="87.723214285714278"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="38T-7x-FZR">
+            <objects>
+                <viewController id="J0R-gO-xLm" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OwT-q9-a9z">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="$" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wQI-HA-47h">
+                                <rect key="frame" x="20" y="114" width="374" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p5k-7p-jQL">
+                                <rect key="frame" x="0.0" y="168" width="414" height="590"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UzR-Fo-7p0">
+                                <rect key="frame" x="332" y="766" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add Item"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j3e-0y-9qi">
+                                <rect key="frame" x="20" y="766" width="119" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add From Picture"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diA-kE-pdk">
+                                <rect key="frame" x="188" y="766" width="89" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Remove Item"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="t4A-UX-aTx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="q71-Sx-FXJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l8W-5v-vUQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1766.6666666666667" y="825.66964285714278"/>
         </scene>
     </scenes>
     <resources>
