@@ -15,25 +15,29 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var findOutButton: UIButton!
     
-    //Load the scene.  
+    //Load the view.  
     override func viewDidLoad() {
+        //Disable the segue button immediately.
+          //Will only appear when the user hasss filled in the userIncome and the itemPrice (aka NOT nil or 0).  
+        findOutButton.isEnabled = false
+        
         super.viewDidLoad()
+        
+        hideKeyboardWhenTappedAround()
     }
     
-    //TODO:
-    //THE ACCUMULATOR IS NOT HOOKED UP TO THE ACTUAL CALCULATION FUNCTIONALITY
-    //TEST THE addAnotherItem FUNCTION
     @IBAction func addAnotherItem(_ sender: Any) {
-        //TODO: See if I can simplify this process.  
+        //TODO: See if I can simplify this process.
         let itemPriceString = itemPriceTextField.text ?? "0"
-        let theItemPrice = Double(itemPriceString) ?? 0
+        let theItemPrice = Double(itemPriceString) ?? 0.0
         
         //Save the numbers by adding them to the accumulator.
         theCalculationsModel.accumulator += theItemPrice
         print("Add Another Item function accumulator = ", theCalculationsModel.accumulator)
         
         //Clear the textfield.
-        itemPriceTextField.text = nil
+         //TODO: Add the correct currency format (eg. $0.00)
+        itemPriceTextField.text = "0"
     }
     
     @IBAction func reset(_ sender: Any) {
@@ -41,8 +45,43 @@ class MainViewController: UIViewController {
         theCalculationsModel.accumulator = 0.0
         print("Reset function accumulator = ", theCalculationsModel.accumulator)
         
-        //Clear the textfield.
-        itemPriceTextField.text = nil
+        //Set the textfield to 0.
+         //TODO: Add the correct currency format (eg. $0.00)
+        itemPriceTextField.text = "0"
+    }
+    
+    //TODO: Connect to the income textfield in this view.
+    @IBAction func checkIncomeTextFeild(_ sender: Any) {
+        let incomeString = incomeTextField.text ?? "0"
+        let theIncome = Double(incomeString) ?? 0.0
+        
+        //TODO: Better but not perfect.  Need to click outside of the textfield twice to get the button to enable.
+        if (incomeString.isEmpty) {
+            incomeTextField.text = "0"
+        } else {
+            findOutButton.isEnabled = true
+       }
+        
+        if (theIncome == 0) {
+            print("Ask user about debt, expenses, and go onto building wealth route.")
+        }
+    }
+    
+    //TODO: Connect to the income textfield in this view.
+    @IBAction func checkItemPriceTextFeild(_ sender: Any) {
+        let itemPriceString = itemPriceTextField.text ?? "0"
+        let theItemPrice = Double(itemPriceString) ?? 0.0
+        
+        //TODO: Better but not perfect.  Need to click outside of the textfield twice to get the button to enable.
+        if (itemPriceString.isEmpty) {
+            itemPriceTextField.text = "0"
+        } else {
+            findOutButton.isEnabled = true
+       }
+        
+        if (theItemPrice == 0) {
+            print("Ask user about debt, expenses, and go onto building wealth route.")
+        }
     }
     
     // MARK: Prepare for Segue
@@ -52,21 +91,13 @@ class MainViewController: UIViewController {
             
             //When the user presses the Find Out button, do the calculations and segue the result.
             if actualSender == findOutButton {
+                //TODO: See if I can simplify this process.
                 let incomeString = incomeTextField.text ?? "0"
                 let itemPriceString = itemPriceTextField.text ?? "0"
                 
-                let theIncome = Double(incomeString) ?? 0
-                let theItemPrice = Double(itemPriceString) ?? 0
-                
-                //TODO: Check if incomeString or itemPriceString are 0.  If so stop the segue.
-                  //May need to use shouldPerformSegueWithIdentifier
-                if (theIncome == 0) {
-                    print("Please enter a number greater than 0 for your latest income.")
-                }
-                
-                if (theItemPrice == 0) {
-                    print("Please enter a number greater than 0 for the item price.")
-                }
+                //TODO: See if I can simplify this process.
+                let theIncome = Double(incomeString) ?? 0.0
+                let theItemPrice = Double(itemPriceString) ?? 0.0
                 
                 let theResult = theCalculationsModel.hoursToWork(itemPrice: theItemPrice, userIncome: theIncome)
                 
@@ -74,7 +105,21 @@ class MainViewController: UIViewController {
             }
         }
         
-        //Clear the textfield.  
-        itemPriceTextField.text = nil
+        //Clear the textfield.
+         //TODO: Add the correct currency format (eg. $0.00)
+        itemPriceTextField.text = "0"
+    }
+}
+
+extension UIViewController {
+    //Source -- https://stackoverflow.com/questions/52019014/make-keyboard-disappear-when-clicking-outside-of-search-bar-swift 
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

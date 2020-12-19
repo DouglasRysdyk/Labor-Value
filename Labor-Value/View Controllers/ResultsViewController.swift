@@ -13,6 +13,7 @@ class ResultsViewController: UIViewController {
     var theCalculationsModel: Calculations?
     
     @IBOutlet weak var theResult: UILabel!
+    @IBOutlet weak var theUnitOfTime: UILabel!
     
     //Holds the segued result data.
     //I should 100% never ever see it say error.
@@ -21,7 +22,7 @@ class ResultsViewController: UIViewController {
     //Holds the result for the displayOriginalNumber function.
     var savedResult = 0.0
     
-    //Load the scene.  
+    //Load the view.  
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,46 +34,58 @@ class ResultsViewController: UIViewController {
     
     //Simply show the original number.  No calculations.
     @IBAction func displayOriginalNumber(_ sender: Any) {
-        print("displayOriginalNumber: ", savedResult)
-        
         //I shouldn't see this either.
         if savedResult == 0.0 {
             theResult.text = "Error!"
         }
         
         theResult.text = String(savedResult)
+        
+        theUnitOfTime.text = String("hours.")
     }
     
     //Convert hours to seconds.
     @IBAction func hoursToSeconds(_ sender: Any) {
         //TODO: Review this I don't trust it.
         theResult.text = String(theCalculationsModel?.workHoursToSeconds(hoursToWork: savedResult) ?? savedResult)
+        
+        theUnitOfTime.text = String("seconds.")
     }
     
     //Convert hours to minutes.
     @IBAction func hoursToMinutes(_ sender: Any) {
         //TODO: Review this I don't trust it.
         theResult.text = String(theCalculationsModel?.workHoursToMinutes(hoursToWork: savedResult) ?? savedResult)
+        
+        theUnitOfTime.text = String("minutes.")
     }
     
     //Convert hours to days if hours is greater than or equal to 24.
     @IBAction func hoursToDays(_ sender: Any) {
         theResult.text = String(theCalculationsModel?.workHoursToDays(hoursToWork: savedResult) ?? savedResult)
+        
+        theUnitOfTime.text = String("days.")
     }
     
     //Convert hours to weeks if hours is greater than or equal to 168.
     @IBAction func hoursToWeeks(_ sender: Any) {
         theResult.text = String(theCalculationsModel?.workHoursToWeeks(hoursToWork: savedResult) ?? savedResult)
+        
+        theUnitOfTime.text = String("weeks.")
     }
     
     //Convert hours to months if hours is greater than or equal to 730.5.
     @IBAction func hoursToMonths(_ sender: Any) {
         theResult.text = String(theCalculationsModel?.workHoursToMonths(hoursToWork: savedResult) ?? savedResult)
+        
+        theUnitOfTime.text = String("months.")
     }
     
     //Convert hours to yearss if hours is greater than or equal to 8766.
     @IBAction func hoursToYears(_ sender: Any) {
         theResult.text = String(theCalculationsModel?.workHoursToYears(hoursToWork: savedResult) ?? savedResult)
+        
+        theUnitOfTime.text = String("years.")
     }
     
     /*
