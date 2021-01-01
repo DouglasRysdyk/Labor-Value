@@ -11,43 +11,27 @@
 \f1\b0 \ulnone  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
 \cf0 \ul Commit:\ulnone  \
-\
 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
 \ul TODO:\ulnone  \
+- \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0
-\cf0 - Commit \
-- Design the FirstTime screen [1] \
-  - What goes there, what functionality do I need to add? \
-- Design the User screen [1] \
-  - Want a better name.  \
-  - What goes here?\
-    - History, goals, user info, etc. \
-    - What can be changed? \
-- Design the settings screen [1] \
-  - Where is the settings screen accessed from?  \
-- Begin designing the budgeting portion, and the goals function [1] \
+\cf0 - Add the calculation to figure out someone's hourly labor value.  \
+- Connect that result with the rest of the program (AKA the income textfield in the MainViewController).  \
+- Change all instances of Textfield to TextField (capital F).  \
+- Show and go over with Dad.  \
+- 
+\f2\i\b LATER:
+\f1\i0\b0  \
+- Make sure all textfields need to be filled properly before allowing the user to move.  Right now only one textfield needs to be properly checked.  \
+  - ALL textfield checks are cut from the same cloth and thus all need to be changed.  Right now they are in the UpdateLatestIncomeInfoViewController and the MainViewController.  \
+  - Rework the textfield check through pseudo-code, then rewrite.  \
+  - Test and debug so that it works the way you want.  \
+- Save what kind of employee the user is with the persistent container.  \
+- Disable stuff when the appropriate button is pressed.  \
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0
 \cf0 \ul NEXT:\ulnone  \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
-\cf0 - FirstTimeViewController: \
-  - Ask what kind of job you have (hourly, salary, inconsistent, unemployed).  \
-  - If Hourly: \
-    - Enter hourly rate.  \
-      - This is the easiest but it seems too easy.  Should I still ask for a paycheck?  Should I still ask for an amount of hours worked?  Should I ask for both?  \
-  - If Salary: \
-    - Enter how much you will be paid.  \
-    - Enter how many hours you work a week.  \
-  - If Inconsistent: \
-    - How many hours you worked from two calendar dates.  \
-    - How much you made during that period.  \
-    - These two factors determine your hourly labor value.  \
-  - If Unemployed: \
-    - Enter your last paycheck date.  \
-    - Enter your total savings.  \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0
-\cf0 - Make UI fancy.  Write TODO list for this first.  \
-  - Budgeting App Idea -- "Fill the circle" as a visual way to complete goals.  Would be on the User screen.  \
+- Add persistence to save and carry data throughout the app.  \
 - Write an explanation or sales pitch that will go on the set up screen, and another for the app store.  \
   - I need to succinctly explain who the app is for, and how to use the app.  \
 - Finish any TODOs left in the code.  \

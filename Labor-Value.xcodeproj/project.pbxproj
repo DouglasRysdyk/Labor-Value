@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		91574075257585060095D875 /* FirstTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91574074257585060095D875 /* FirstTimeViewController.swift */; };
+		91574075257585060095D875 /* UpdateLatestIncomeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91574074257585060095D875 /* UpdateLatestIncomeInfoViewController.swift */; };
 		9157407A257585BB0095D875 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91574079257585BB0095D875 /* ResultsViewController.swift */; };
 		91BF53BD256AF4FF00F36455 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BF53BC256AF4FF00F36455 /* MainViewController.swift */; };
 		91C60F66256D9E350089B0C6 /* Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C60F65256D9E350089B0C6 /* Calculations.swift */; };
@@ -40,7 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		91574074257585060095D875 /* FirstTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTimeViewController.swift; sourceTree = "<group>"; };
+		91574074257585060095D875 /* UpdateLatestIncomeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateLatestIncomeInfoViewController.swift; sourceTree = "<group>"; };
 		91574079257585BB0095D875 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		91BF53BC256AF4FF00F36455 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		91C60F65256D9E350089B0C6 /* Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculations.swift; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		91BF53C6256AF52300F36455 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				91574074257585060095D875 /* FirstTimeViewController.swift */,
+				91574074257585060095D875 /* UpdateLatestIncomeInfoViewController.swift */,
 				91BF53BC256AF4FF00F36455 /* MainViewController.swift */,
 				91574079257585BB0095D875 /* ResultsViewController.swift */,
 			);
@@ -295,7 +295,7 @@
 				91D2157B256A22B1004C8327 /* SceneDelegate.swift in Sources */,
 				9157407A257585BB0095D875 /* ResultsViewController.swift in Sources */,
 				91C60F66256D9E350089B0C6 /* Calculations.swift in Sources */,
-				91574075257585060095D875 /* FirstTimeViewController.swift in Sources */,
+				91574075257585060095D875 /* UpdateLatestIncomeInfoViewController.swift in Sources */,
 				91BF53BD256AF4FF00F36455 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
