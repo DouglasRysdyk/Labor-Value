@@ -10,20 +10,50 @@ import UIKit
 class MainViewController: UIViewController {
     let theCalculationsModel = Calculations()
     
-    @IBOutlet weak var incomeTextField: UITextField! //ONLY HERE FOR TESTING
+    //FIXME: FOR TESTING ONLY
+    @IBOutlet weak var incomeTextField: UITextField!
     @IBOutlet weak var itemPriceTextField: UITextField!
     
-    @IBOutlet weak var findOutButton: UIButton!
+    @IBOutlet weak var theResult: UILabel!
+
+    var theResultString = ""
+    
+    //This is the default option.
+    //TODO: Make sure this doesn't show up somewhere other than the result label's text.
+    //TODO: I feel hard coding this might be the wrong move but I'll think it through later.
+    var theUnitOfTime = "hours"
+    
+    //Display the original number and possibly more.
+    var savedResult = 0.0
     
     //Load the view.  
     override func viewDidLoad() {
-        //Disable the segue button immediately.
-          //Will only appear when the user hasss filled in the userIncome and the itemPrice (aka NOT nil or 0).  
-        findOutButton.isEnabled = false
-        
         super.viewDidLoad()
         
+        //The result text should start empty every time.
+        theResult.text = theResultString
+        
         hideKeyboardWhenTappedAround()
+    }
+    
+    //FIXME: FOR TESTING ONLY
+    //TODO: Replace with a function that checks for when the text changes and runs a calculation and label rewrite each time there is a change.  No need to hit enter.
+    @IBAction func getResult(_ sender: Any) {
+        let itemPriceString = itemPriceTextField.text ?? "0"
+        let theItemPrice = Double(itemPriceString) ?? 0.0
+        
+        let incomeString = incomeTextField.text ?? "0"
+        let theIncome = Double(incomeString) ?? 0.0
+        
+        //Save the calculated result
+        savedResult = theCalculationsModel.hoursToWork(itemPrice: theItemPrice, userIncome: theIncome)
+        
+        //Convert the savedResult into a string for theResult label.
+        theResultString = String(savedResult)
+        
+        //Change theResult's label text to this using the previous calculations.
+        //MARK: DRY 1
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
     
     @IBAction func addAnotherItem(_ sender: Any) {
@@ -48,69 +78,79 @@ class MainViewController: UIViewController {
         //Set the textfield to 0.
          //TODO: Add the correct currency format (eg. $0.00)
         itemPriceTextField.text = "0"
+        
+        //Disappear the result label.
+        theResult.text = ""
     }
-    
-    //TODO: Connect to the income textfield in this view.
-    @IBAction func checkIncomeTextFeild(_ sender: Any) {
-        let incomeString = incomeTextField.text ?? "0"
-        let theIncome = Double(incomeString) ?? 0.0
-        
-        //TODO: Better but not perfect.  Need to click outside of the textfield twice to get the button to enable.
-        if (incomeString.isEmpty) {
-            incomeTextField.text = "0"
-        } else {
-            findOutButton.isEnabled = true
-       }
-        
-        if (theIncome == 0) {
-            print("Ask user about debt, expenses, and go onto building wealth route.")
-        }
-    }
-    
-    //TODO: Connect to the income textfield in this view.
-    @IBAction func checkItemPriceTextFeild(_ sender: Any) {
-        let itemPriceString = itemPriceTextField.text ?? "0"
-        let theItemPrice = Double(itemPriceString) ?? 0.0
-        
-        //TODO: Better but not perfect.  Need to click outside of the textfield twice to get the button to enable.
-        if (itemPriceString.isEmpty) {
-            itemPriceTextField.text = "0"
-        } else {
-            findOutButton.isEnabled = true
-       }
-        
-        if (theItemPrice == 0) {
-            print("Ask user about debt, expenses, and go onto building wealth route.")
-        }
-    }
-    
-    // MARK: Prepare for Segue
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let actualDestination = segue.destination as? ResultsViewController, let actualSender = sender as? UIButton {
-            actualDestination.theCalculationsModel = theCalculationsModel
-            
-            //When the user presses the Find Out button, do the calculations and segue the result.
-            if actualSender == findOutButton {
-                //TODO: See if I can simplify this process.
-                let incomeString = incomeTextField.text ?? "0"
-                let itemPriceString = itemPriceTextField.text ?? "0"
-                
-                //TODO: See if I can simplify this process.
-                let theIncome = Double(incomeString) ?? 0.0
-                let theItemPrice = Double(itemPriceString) ?? 0.0
-                
-                let theResult = theCalculationsModel.hoursToWork(itemPrice: theItemPrice, userIncome: theIncome)
-                
-                actualDestination.theResultString = String(theResult)
-            }
+ 
+    @IBAction func displayOriginalNumber(_ sender: Any) {
+        //I should never see this.
+        if savedResult == 0.0 {
+            theResult.text = "Error!"
         }
         
-        //Clear the textfield.
-         //TODO: Add the correct currency format (eg. $0.00)
-        itemPriceTextField.text = "0"
+        //MARK: DRY 1
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
+        
+        theUnitOfTime = "hours"
+    }
+    
+    @IBAction func hoursToSeconds(_ sender: Any) {
+        //MARK: DRY 2
+        let convertedResult = String(theCalculationsModel.workHoursToSeconds(hoursToWork: savedResult))
+        
+        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
+        
+        theUnitOfTime = "seconds"
+    }
+    
+    @IBAction func hoursToMinutes(_ sender: Any) {
+        //MARK: DRY 2
+        let convertedResult = String(theCalculationsModel.workHoursToMinutes(hoursToWork: savedResult))
+        
+        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
+        
+        theUnitOfTime = "minutes"
+    }
+    
+    @IBAction func hoursToDays(_ sender: Any) {
+        //MARK: DRY 2
+        let convertedResult = String(theCalculationsModel.workHoursToDays(hoursToWork: savedResult))
+        
+        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
+        
+        theUnitOfTime = "days"
+    }
+    
+    @IBAction func hoursToWeeks(_ sender: Any) {
+        //MARK: DRY 2
+        let convertedResult = String(theCalculationsModel.workHoursToWeeks(hoursToWork: savedResult))
+        
+        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
+        
+        theUnitOfTime = "weeks"
+    }
+    
+    @IBAction func hoursToMonths(_ sender: Any) {
+        //MARK: DRY 2
+        let convertedResult = String(theCalculationsModel.workHoursToMonths(hoursToWork: savedResult))
+        
+        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
+        
+        theUnitOfTime = "months"
+    }
+    
+    @IBAction func hoursToYears(_ sender: Any) {
+        //MARK: DRY 2
+        let convertedResult = String(theCalculationsModel.workHoursToYears(hoursToWork: savedResult))
+        
+        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
+        
+        theUnitOfTime = "years"
     }
 }
 
+//Dismiss the keyboard by tapping anywhere on the screen other than the keyboard.
 extension UIViewController {
     //Source -- https://stackoverflow.com/questions/52019014/make-keyboard-disappear-when-clicking-outside-of-search-bar-swift 
     func hideKeyboardWhenTappedAround() {

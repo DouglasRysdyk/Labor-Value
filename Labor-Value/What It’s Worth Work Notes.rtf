@@ -11,27 +11,62 @@
 \f1\b0 \ulnone  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
 \cf0 \ul Commit:\ulnone  \
+\
 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
-\ul TODO:\ulnone  \
-- \
+\ul TODO:\ulnone   \
+- Rethink and rewrite the check textfield functions.  \
+  - Whenever the user enters a number the calculation should run.  The return key is basically there just to remove the keypad.  \
+  - Look over available functions.  \
+- Fix DRY 1 -- The initial label text is set and displayed in two different places.  \
+  - Write a separate function for displaying the original calculated value.  \
+  - Delete and reconnect the Hours button outlet.  \
+  - Call that function when the Hours button is pressed.\
+  - Call that function when the calculation is complete or something. \
+- Research truncating and wrapping a label either programmatically or not.  \
+  - READ: https://developer.apple.com/documentation/uikit/uilabel/1620541-textalignment \
+  - READ: https://developer.apple.com/documentation/uikit/uilabel/1620525-linebreakmode \
+- Add a temporary button for getting the result.  \
+  - Eventually remove and use editingDidEnd to trigger the calculation.  \
+- Need to make the units of time buttons buttons disappear until they are needed as well.  \
+  - TODO: Probably going to try the remove from superview thing that is here.  \
+  - READ: https://stackoverflow.com/questions/36191500/swift-delete-uibutton-when-button-is-clicked \
+  - READ: https://stackoverflow.com/questions/34439675/how-do-you-remove-a-label-with-code-in-swift\
+  - READ: https://stackoverflow.com/questions/37342025/remove-uibutton-programmatically-in-swift \
+- Figure out why the unitOfTime buttons are not working.  \
+  - Press the button once and it keeps the last unit of time, but the calculation changes.  \
+  - Press the button again and the unit of time changes like it should have the first time.   \
+- Fix DRY 2 -- A new convertedResult is used every time the unit of time is changed.   \
+  - Probably need one or more "global" variables.  \
+- Look over all in code TODOs and organize.  \
+- Consider reaching a wider audience.  Internationalization, blind, deaf, color blind, stuff.  \
+  - https://developer.apple.com/localization/ \
+  - https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/supporting_voiceover_in_your_app \
+- Read about designing human interfaces and how to get your app accepted onto the app store -- https://developer.apple.com/design/ \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0
-\cf0 - Add the calculation to figure out someone's hourly labor value.  \
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0
+\cf0 \ul NEXT:\ulnone  \
+- SORT: Research proper currency conversion.  \
+- SORT: See if I can simplify the process for converting a string to a double and back.  I feel like there's a lot of repeating code.  \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
+\cf0 - Change the name of the UpdateLatestIncomeInfoViewController to HourlyRateViewController.  \
+- Clean up Work Notes (here) again.  \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0
+\cf0 - Simplify and improve the HourlyRateViewController and View.  \
+  - Remove your current UI.  \
+  - Simplify -- We just need to know what the user's \
 - Connect that result with the rest of the program (AKA the income textfield in the MainViewController).  \
+  - Currently use a segue to store the user's hourly rate entry.  \
 - Change all instances of Textfield to TextField (capital F).  \
+- Add persistence to save the user's hourly wage.  \
+  - Call it without any UI from the persistent container.  \
+- Research dictation.  \
+- Research Apple Watch connection.  \
 - Show and go over with Dad.  \
-- 
-\f2\i\b LATER:
-\f1\i0\b0  \
 - Make sure all textfields need to be filled properly before allowing the user to move.  Right now only one textfield needs to be properly checked.  \
   - ALL textfield checks are cut from the same cloth and thus all need to be changed.  Right now they are in the UpdateLatestIncomeInfoViewController and the MainViewController.  \
   - Rework the textfield check through pseudo-code, then rewrite.  \
   - Test and debug so that it works the way you want.  \
-- Save what kind of employee the user is with the persistent container.  \
-- Disable stuff when the appropriate button is pressed.  \
-\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0
-\cf0 \ul NEXT:\ulnone  \
-- Add persistence to save and carry data throughout the app.  \
 - Write an explanation or sales pitch that will go on the set up screen, and another for the app store.  \
   - I need to succinctly explain who the app is for, and how to use the app.  \
 - Finish any TODOs left in the code.  \
