@@ -11,17 +11,15 @@
 \f1\b0 \ulnone  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
 \cf0 \ul Commit:\ulnone  \
-\
+Added the itemPriceTextFieldEditingChanged function.  \
+Made it so that itemPriceTextFieldEditingChanged runs a calculation on every button entry.  \
+Added a default value to the income textfield in the Main View.  \
+Removed the getResult button action.  \
+Set the default value of the itemPrice textfield in the Main View to 0.00.  \
+Edited down the income and item price textfields to a single line.  \
+Removed the getResult button from the Main View.  \
 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
 \ul TODO:\ulnone   \
-- Rethink and rewrite the check textfield functions.  \
-  - Whenever the user enters a number the calculation should run.  The return key is basically there just to remove the keypad.  \
-  - Look over available functions.  \
-- Fix DRY 1 -- The initial label text is set and displayed in two different places.  \
-  - Write a separate function for displaying the original calculated value.  \
-  - Delete and reconnect the Hours button outlet.  \
-  - Call that function when the Hours button is pressed.\
-  - Call that function when the calculation is complete or something. \
 - Research truncating and wrapping a label either programmatically or not.  \
   - READ: https://developer.apple.com/documentation/uikit/uilabel/1620541-textalignment \
   - READ: https://developer.apple.com/documentation/uikit/uilabel/1620525-linebreakmode \
@@ -35,6 +33,11 @@
 - Figure out why the unitOfTime buttons are not working.  \
   - Press the button once and it keeps the last unit of time, but the calculation changes.  \
   - Press the button again and the unit of time changes like it should have the first time.   \
+- Fix DRY 1 -- The initial label text is set and displayed in two different places.  \
+  - Write a separate function for displaying the original calculated value.  \
+  - Delete and reconnect the Hours button outlet.  \
+  - Call that function when the Hours button is pressed.\
+  - Call that function when the calculation is complete or something. \
 - Fix DRY 2 -- A new convertedResult is used every time the unit of time is changed.   \
   - Probably need one or more "global" variables.  \
 - Look over all in code TODOs and organize.  \

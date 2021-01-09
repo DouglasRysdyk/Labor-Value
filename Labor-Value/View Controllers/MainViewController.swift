@@ -18,12 +18,9 @@ class MainViewController: UIViewController {
 
     var theResultString = ""
     
-    //This is the default option.
-    //TODO: Make sure this doesn't show up somewhere other than the result label's text.
-    //TODO: I feel hard coding this might be the wrong move but I'll think it through later.
-    var theUnitOfTime = "hours"
+    var theUnitOfTime = ""
     
-    //Display the original number and possibly more.
+    //Display the original number and use for time conversions.
     var savedResult = 0.0
     
     //Load the view.  
@@ -31,35 +28,37 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         //The result text should start empty every time.
+        //Could start or reset to instructions?
         theResult.text = theResultString
         
         hideKeyboardWhenTappedAround()
     }
     
-    //FIXME: FOR TESTING ONLY
-    //TODO: Replace with a function that checks for when the text changes and runs a calculation and label rewrite each time there is a change.  No need to hit enter.
-    @IBAction func getResult(_ sender: Any) {
-        let itemPriceString = itemPriceTextField.text ?? "0"
-        let theItemPrice = Double(itemPriceString) ?? 0.0
+    //Do the calculation here.
+    @IBAction func itemPriceTextFieldEditingChanged(_ sender: UITextField) {
+        //Editing Changed Source -- https://youtu.be/XUH1O1BTUvo?t=100 till 6:26
+          //Why did we change the thing from Any to Textfield?
+          //Why could we rename the sender to textField?
         
-        let incomeString = incomeTextField.text ?? "0"
-        let theIncome = Double(incomeString) ?? 0.0
-        
+        //Convert the textfield text to doubles.
+        let theItemPrice = Double(itemPriceTextField.text ?? "0") ?? 0.0
+        let theIncome = Double(incomeTextField.text ?? "0") ?? 0.0
+            
         //Save the calculated result
         savedResult = theCalculationsModel.hoursToWork(itemPrice: theItemPrice, userIncome: theIncome)
-        
+            
         //Convert the savedResult into a string for theResult label.
         theResultString = String(savedResult)
         
+        theUnitOfTime = "hours"
+            
         //Change theResult's label text to this using the previous calculations.
         //MARK: DRY 1
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
     }
     
     @IBAction func addAnotherItem(_ sender: Any) {
-        //TODO: See if I can simplify this process.
-        let itemPriceString = itemPriceTextField.text ?? "0"
-        let theItemPrice = Double(itemPriceString) ?? 0.0
+        let theItemPrice = Double(itemPriceTextField.text ?? "0") ?? 0.0
         
         //Save the numbers by adding them to the accumulator.
         theCalculationsModel.accumulator += theItemPrice
@@ -79,7 +78,7 @@ class MainViewController: UIViewController {
          //TODO: Add the correct currency format (eg. $0.00)
         itemPriceTextField.text = "0"
         
-        //Disappear the result label.
+        //Make the result label disappear.
         theResult.text = ""
     }
  
@@ -89,64 +88,64 @@ class MainViewController: UIViewController {
             theResult.text = "Error!"
         }
         
+        theUnitOfTime = "hours"
+        
         //MARK: DRY 1
         theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
-        
-        theUnitOfTime = "hours"
     }
     
     @IBAction func hoursToSeconds(_ sender: Any) {
         //MARK: DRY 2
         let convertedResult = String(theCalculationsModel.workHoursToSeconds(hoursToWork: savedResult))
         
-        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
-        
         theUnitOfTime = "seconds"
+        
+        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
     }
     
     @IBAction func hoursToMinutes(_ sender: Any) {
         //MARK: DRY 2
         let convertedResult = String(theCalculationsModel.workHoursToMinutes(hoursToWork: savedResult))
         
-        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
-        
         theUnitOfTime = "minutes"
+        
+        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
     }
     
     @IBAction func hoursToDays(_ sender: Any) {
         //MARK: DRY 2
         let convertedResult = String(theCalculationsModel.workHoursToDays(hoursToWork: savedResult))
         
-        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
-        
         theUnitOfTime = "days"
+        
+        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
     }
     
     @IBAction func hoursToWeeks(_ sender: Any) {
         //MARK: DRY 2
         let convertedResult = String(theCalculationsModel.workHoursToWeeks(hoursToWork: savedResult))
         
-        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
-        
         theUnitOfTime = "weeks"
+        
+        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
     }
     
     @IBAction func hoursToMonths(_ sender: Any) {
         //MARK: DRY 2
         let convertedResult = String(theCalculationsModel.workHoursToMonths(hoursToWork: savedResult))
         
-        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
-        
         theUnitOfTime = "months"
+        
+        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
     }
     
     @IBAction func hoursToYears(_ sender: Any) {
         //MARK: DRY 2
         let convertedResult = String(theCalculationsModel.workHoursToYears(hoursToWork: savedResult))
         
-        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
-        
         theUnitOfTime = "years"
+        
+        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
     }
 }
 
