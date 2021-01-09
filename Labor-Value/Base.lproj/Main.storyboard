@@ -275,8 +275,8 @@
                                     <action selector="reset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CmT-dt-dG2"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIW-bv-DXk">
-                                <rect key="frame" x="20" y="537" width="374" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Result" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IIW-bv-DXk">
+                                <rect key="frame" x="20" y="537" width="374" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -310,9 +310,6 @@
                                 <rect key="frame" x="207" y="631" width="34" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Days"/>
-                                <connections>
-                                    <action selector="hoursToDays:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sLx-kA-TPy"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ioh-L8-aR3">
                                 <rect key="frame" x="249" y="631" width="46" height="30"/>
@@ -344,6 +341,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="LLh-Tb-rFj"/>
                     <connections>
+                        <outlet property="displayOriginalNumberButton" destination="1jF-bh-fC7" id="TyA-jR-Sv7"/>
+                        <outlet property="hoursToDaysButton" destination="01Z-vH-HJE" id="Hfu-aQ-gcr"/>
+                        <outlet property="hoursToMinutesButton" destination="Wpf-Ac-hN3" id="rgr-y1-k0Y"/>
+                        <outlet property="hoursToMonthsButton" destination="VPx-VB-uWe" id="Cf9-6x-fvY"/>
+                        <outlet property="hoursToSecondsButton" destination="ENi-NP-ZGJ" id="Jdw-dY-OND"/>
+                        <outlet property="hoursToWeeksButton" destination="Ioh-L8-aR3" id="08i-K5-vEB"/>
+                        <outlet property="hoursToYearsButton" destination="kmp-ku-3Bt" id="X4T-Gu-pUz"/>
                         <outlet property="incomeTextField" destination="0zv-9c-0I2" id="rdJ-7f-YAb"/>
                         <outlet property="itemPriceTextField" destination="TfR-Vf-xgO" id="9HL-so-RYX"/>
                         <outlet property="theResult" destination="IIW-bv-DXk" id="QQz-4r-yeq"/>

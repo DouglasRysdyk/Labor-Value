@@ -11,35 +11,11 @@
 \f1\b0 \ulnone  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
 \cf0 \ul Commit:\ulnone  \
-Added the itemPriceTextFieldEditingChanged function.  \
-Made it so that itemPriceTextFieldEditingChanged runs a calculation on every button entry.  \
-Added a default value to the income textfield in the Main View.  \
-Removed the getResult button action.  \
-Set the default value of the itemPrice textfield in the Main View to 0.00.  \
-Edited down the income and item price textfields to a single line.  \
-Removed the getResult button from the Main View.  \
+\
 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
 \ul TODO:\ulnone   \
-- Research truncating and wrapping a label either programmatically or not.  \
-  - READ: https://developer.apple.com/documentation/uikit/uilabel/1620541-textalignment \
-  - READ: https://developer.apple.com/documentation/uikit/uilabel/1620525-linebreakmode \
-- Add a temporary button for getting the result.  \
-  - Eventually remove and use editingDidEnd to trigger the calculation.  \
-- Need to make the units of time buttons buttons disappear until they are needed as well.  \
-  - TODO: Probably going to try the remove from superview thing that is here.  \
-  - READ: https://stackoverflow.com/questions/36191500/swift-delete-uibutton-when-button-is-clicked \
-  - READ: https://stackoverflow.com/questions/34439675/how-do-you-remove-a-label-with-code-in-swift\
-  - READ: https://stackoverflow.com/questions/37342025/remove-uibutton-programmatically-in-swift \
-- Figure out why the unitOfTime buttons are not working.  \
-  - Press the button once and it keeps the last unit of time, but the calculation changes.  \
-  - Press the button again and the unit of time changes like it should have the first time.   \
-- Fix DRY 1 -- The initial label text is set and displayed in two different places.  \
-  - Write a separate function for displaying the original calculated value.  \
-  - Delete and reconnect the Hours button outlet.  \
-  - Call that function when the Hours button is pressed.\
-  - Call that function when the calculation is complete or something. \
-- Fix DRY 2 -- A new convertedResult is used every time the unit of time is changed.   \
-  - Probably need one or more "global" variables.  \
+- Work on the UpdateLatestIncomeView and View Controller.  \
+  - Make TODO list.  \
 - Look over all in code TODOs and organize.  \
 - Consider reaching a wider audience.  Internationalization, blind, deaf, color blind, stuff.  \
   - https://developer.apple.com/localization/ \
@@ -72,7 +48,16 @@ Removed the getResult button from the Main View.  \
   - Test and debug so that it works the way you want.  \
 - Write an explanation or sales pitch that will go on the set up screen, and another for the app store.  \
   - I need to succinctly explain who the app is for, and how to use the app.  \
-- Finish any TODOs left in the code.  \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
+\cf0 - Fix DRY 1 -- The initial label text is set and displayed in two different places.  \
+  - Write a separate function for displaying the original calculated value.  \
+  - Delete and reconnect the Hours button outlet.  \
+  - Call that function when the Hours button is pressed.\
+  - Call that function when the calculation is complete or something. \
+- Fix DRY 2 -- A new convertedResult is used every time the unit of time is changed.   \
+  - Probably need one or more "global" variables.  \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0
+\cf0 - Finish any TODOs left in the code.  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
 \cf0 \
 \ul Fixes:\ulnone  \
@@ -151,4 +136,12 @@ Removed the getResult button from the Main View.  \
     - This may be a third way decent prototyping or public alpha idea.  \
 \
 \
-}
+SORT: \
+- No paycheck question \
+- How much do you make an hour?  \
+  - Can make a tool for this.  \
+- What are we buying?  Guy says a beer.  \
+  - The program should know what a beer costs on average.  \
+- Dictation should be added.  \
+- Do a calculation immediately after the user starts typing in numbers.  \
+  - What if someone doesn\'92t want to hit enter.  This isn\'92t really a concern but maybe I can do this anyway.   }

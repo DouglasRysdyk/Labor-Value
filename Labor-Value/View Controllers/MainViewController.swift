@@ -15,6 +15,14 @@ class MainViewController: UIViewController {
     @IBOutlet weak var itemPriceTextField: UITextField!
     
     @IBOutlet weak var theResult: UILabel!
+    
+    @IBOutlet weak var hoursToSecondsButton: UIButton!
+    @IBOutlet weak var hoursToMinutesButton: UIButton!
+    @IBOutlet weak var displayOriginalNumberButton: UIButton!
+    @IBOutlet weak var hoursToDaysButton: UIButton!
+    @IBOutlet weak var hoursToWeeksButton: UIButton!
+    @IBOutlet weak var hoursToMonthsButton: UIButton!
+    @IBOutlet weak var hoursToYearsButton: UIButton!
 
     var theResultString = ""
     
@@ -31,14 +39,14 @@ class MainViewController: UIViewController {
         //Could start or reset to instructions?
         theResult.text = theResultString
         
+        hideTimeConversionButtons(displaySwitch: true)
+        
         hideKeyboardWhenTappedAround()
     }
     
     //Do the calculation here.
     @IBAction func itemPriceTextFieldEditingChanged(_ sender: UITextField) {
         //Editing Changed Source -- https://youtu.be/XUH1O1BTUvo?t=100 till 6:26
-          //Why did we change the thing from Any to Textfield?
-          //Why could we rename the sender to textField?
         
         //Convert the textfield text to doubles.
         let theItemPrice = Double(itemPriceTextField.text ?? "0") ?? 0.0
@@ -51,6 +59,8 @@ class MainViewController: UIViewController {
         theResultString = String(savedResult)
         
         theUnitOfTime = "hours"
+        
+        hideTimeConversionButtons(displaySwitch: false)
             
         //Change theResult's label text to this using the previous calculations.
         //MARK: DRY 1
@@ -70,13 +80,13 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func reset(_ sender: Any) {
-        //Clear the accumulator.
         theCalculationsModel.accumulator = 0.0
         print("Reset function accumulator = ", theCalculationsModel.accumulator)
         
-        //Set the textfield to 0.
+        hideTimeConversionButtons(displaySwitch: true)
+        
          //TODO: Add the correct currency format (eg. $0.00)
-        itemPriceTextField.text = "0"
+        itemPriceTextField.text = "0.00"
         
         //Make the result label disappear.
         theResult.text = ""
@@ -146,6 +156,16 @@ class MainViewController: UIViewController {
         theUnitOfTime = "years"
         
         theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
+    }
+    
+    func hideTimeConversionButtons(displaySwitch: Bool) {
+        hoursToSecondsButton.isHidden = displaySwitch
+        hoursToMinutesButton.isHidden = displaySwitch
+        displayOriginalNumberButton.isHidden = displaySwitch
+        hoursToDaysButton.isHidden = displaySwitch
+        hoursToWeeksButton.isHidden = displaySwitch
+        hoursToMonthsButton.isHidden = displaySwitch
+        hoursToYearsButton.isHidden = displaySwitch
     }
 }
 
