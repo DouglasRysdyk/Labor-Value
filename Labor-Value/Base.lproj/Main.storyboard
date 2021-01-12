@@ -116,6 +116,9 @@
                                 <rect key="frame" x="207" y="520" width="34" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Days"/>
+                                <connections>
+                                    <action selector="hoursToDays:" destination="BYZ-38-t0r" eventType="touchUpInside" id="82m-MT-d7B"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ioh-L8-aR3">
                                 <rect key="frame" x="249" y="520" width="46" height="30"/>
