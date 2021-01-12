@@ -1,0 +1,105 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2576
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\fswiss\fcharset0 Helvetica-Oblique;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx4770\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b\fs32 \cf0 Core Data Notes:\
+
+\f1\b0 \ul Source \'97 https://www.youtube.com/watch?v=6XASUd7h5-s&list=PLMRqhzcHGw1aDYKmCuqXQ_IqpWpJlpoJ3\ulnone  \
+- What is the difference between a database and an object graph relation solution.  \
+  - Not possible for syncing or sharing data.  Although CloudKit does this a bit.  \
+  - Not an online data storage solution.  \
+- Core data is a bit more abstracted and handles all of the data persistence.  \
+  - Core data uses an SQLite DB under the hood.  \
+  - If you were using a separate DB you would be responsible for all of the inserting, creating, updating, and deleting of data.  \
+- A persistent container is required to store an object relation although the objects do not interact with it directly.   They interact with the layer above which is called the managed object context.  This is the data manager layer.  \
+- In order to save a class you need to subclass them as NSManagedObject.  \
+- You generate these objects via the built in Xcode tool.  Once an object is generated you can write code in it like normal.  This will be one of your Model files.  \
+  - You would use this class like any other class.  You can store objects of this class in Core Data and retrieve them whenever you need to.  \
+-You can define the module you want the core data entity to work with in case there is a similar entity in another module. \
+- SEPARATE: You need to define different integer types depending on the platform you are developing for.  You do NOT save room by making an integer\'92s bit amount smaller than necessary, but you WILL BREAK your app if you do not match the integer bit amount with the platform\'92s bit architecture.  \
+  - https://blakespot.com/ios_device_specifications_grid.html \
+- If you want to specify an array you need to define it as \'93Transformable\'94.  Then in the inspector you can set the custom class to be a [String] for example.  \
+  - If you are using a custom class you can tell it to sort it there as well since it takes a custom class.  \
+- There are THREE ways to generate then code: \
+  - \ul Manual/None\ulnone  \'97 The files are generated.  \
+  - \ul Class Definition\ulnone  \'97 Default.  Nothing is generated before building the app.  No custom classes or nothing.  If the classes were generated before building then there will be an error and you will need to delete the files you generated.  \
+  - \ul Category/Extension\ulnone  \'97 This is sort of a happy medium.  The class extension is NOT generated.  The ONLY generated file is the CLASS DECLARATION.  
+\f0\b Probably recommended generally
+\f1\b0 .  \
+- To generate the code go to Editor \'97> Create NSManagedObject subclass.\
+- Two files are created for the class declaration, and a class extension that contains your attribute\'92s properties.  \
+  - Put custom code into the class declaration.\
+  - Do NOT modify the class extension.  If you need to make any changes to the attribute\'92s properties you need to REGENERATE the class and its properties.  You can delete the original file then.  \
+- The persistent container is located in then app delegate and is generated when you generate your core data files.  \
+  - The save context method is also generated at this point.  \
+- For configuring entities \'97 
+\f2\i https://developer.apple.com/documentation/coredata/modeling_data/configuring_entities
+\f1\i0  \
+- If you do not have core data at the beginning of your project you can add it by manually adding the data model file, AND you need to add the persistent container and save context code for the app delegate manually.  \
+\
+\ul Source \'97 https://www.youtube.com/watch?v=hEz1cUZdsCE\ulnone  \
+- If you have a Person entity and you want to establish a relationship between it and a Family entity you need to\
+  - Add the Family entity in the Core Data GUI \
+  - Give it an attribute (in this case Name) \
+  - Go to the Relationships section. Name the relationship (People in this case) and define a destination.  The destination is basically the data type, and in this case it\'92s Person.  \
+  - In this case we also change the relationship from One to Many.  \
+  - In the Person entity:\
+    - We define a relationship and call it family.  \
+    - The destination is \'93family\'94.  \
+    - We establish an inverse relationship to \'93people\'94.  \
+      - In the family entity this inverse relationship is set automatically for us.  \
+      - This helps us maintain data integrity.  It is recommended you always set up inverse relationships.  \
+____________________________________________________________\ul \ulc0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 Source \'97 https://www.youtube.com/watch?v=N-IajP3gCcc\ulnone  \
+- Manages object graph \
+- NOT a database \
+- A collection of objects connected to one another.  \
+- Can optionally persist data.  Can also search graph.  \
+- Allows for input validation, data model versioning, and change tracking.  \
+- When to use core data: \
+  - Manages the model layer of your application\
+- When NOT to use core data: \
+ - When you need a lightweight model layer.  \
+ - When you need an SQLite Wrapper (Use FMDB \'97 Guss Meuler?) \
+- SQLite VS Core Data: \
+  - SQLite \'97 Lightweight database, very performant, great for mobile devices.  Relationship database.  \
+  - Core data goes further??? \'97 Object-orientated abstraction, adds range of additional features.  \
+- Drawbacks: \
+  - Records need to be in memory.  Can be performance heavy since it can only operate on records when they are in memory.  \
+  - Designed to be run on a single thread.  \
+____________________________________________________________\
+\ul Source \'97 https://medium.com/@chan.henryk/nsuserdefaults-vs-coredata-aa70d3c23b30\ulnone  \
+- User Defaults:  \
+  - Stores data with a key value pair like a dictionary.  \
+  - IDEAL for small amounts of data (like a user\'92s units of measurement).  \
+  - Can save different datatypes this way including NSString.  \
+  - Easy to retrieve and store data.  \
+  - Easy to learn and implement.  \
+  - Bad for sensitive data.  \
+  - Performance decreases with large amounts of data.  \
+- Core Data: \
+  - SIMILAR to a relational database like SQLite.  \
+  - Allows for persistent data.  \
+  - Can store a large amount of data.  The more memory on the phone the more dat can be stored.  \
+  - Can be very fast if the relationship model is set up correctly.  \
+    - 
+\f0\b How do I set up the relationship model correctly
+\f1\b0 ?  \
+  - Can change an object without changing the whole model.  \
+  - Migrating data can be difficult.  \
+  - Needs good data structure and architecture design.  \
+- As an aside he has a couple of other articles that may be alright.  The one I read did a good job of breaking down the difference between User Defaults and Core Data into simple terms \'97 https://medium.com/@chan.henryk \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx4770\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 ____________________________________________________________\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+\
+\
+}

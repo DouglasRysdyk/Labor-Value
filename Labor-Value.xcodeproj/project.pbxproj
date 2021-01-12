@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		915FC01C25AD2B2E00094ADD /* Core Data Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 915FC01B25AD2B2E00094ADD /* Core Data Notes.rtf */; };
 		91BF53BD256AF4FF00F36455 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BF53BC256AF4FF00F36455 /* MainViewController.swift */; };
 		91C60F66256D9E350089B0C6 /* Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C60F65256D9E350089B0C6 /* Calculations.swift */; };
 		91D094A8256B038600F29357 /* What It’s Worth Work Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 91D094A7256B038600F29357 /* What It’s Worth Work Notes.rtf */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		915FC01B25AD2B2E00094ADD /* Core Data Notes.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Core Data Notes.rtf"; sourceTree = "<group>"; };
 		91BF53BC256AF4FF00F36455 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		91C60F65256D9E350089B0C6 /* Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculations.swift; sourceTree = "<group>"; };
 		91D094A7256B038600F29357 /* What It’s Worth Work Notes.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "What It’s Worth Work Notes.rtf"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				91D094A7256B038600F29357 /* What It’s Worth Work Notes.rtf */,
+				915FC01B25AD2B2E00094ADD /* Core Data Notes.rtf */,
 				91D21578256A22B1004C8327 /* AppDelegate.swift */,
 				91D2157A256A22B1004C8327 /* SceneDelegate.swift */,
 				91BF53C8256AF54200F36455 /* Models */,
@@ -256,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				915FC01C25AD2B2E00094ADD /* Core Data Notes.rtf in Resources */,
 				91D21588256A22B4004C8327 /* LaunchScreen.storyboard in Resources */,
 				91D094A8256B038600F29357 /* What It’s Worth Work Notes.rtf in Resources */,
 				91D21585256A22B4004C8327 /* Assets.xcassets in Resources */,
