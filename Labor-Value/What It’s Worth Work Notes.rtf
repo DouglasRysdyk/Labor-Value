@@ -11,16 +11,40 @@
 \f1\b0 \ulnone  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
 \cf0 \ul Commit:\ulnone  \
+Deleted the UpdateLatestIncomeInfo View and the associated ViewController.  \
+Added a label to the MainViewController that asks the user how much they make an hour.  \
+Added a "Figure Out" button (currently not hooked up to anything).  \
+Fixed the size of the incomeTextField in the Main View.  \
+\
+TODO AGAIN: \
+Added the userHourlyIncome double as a Core Data entity.  \
+Add the context to the MainViewController. \
+Begin writing the fetch function for the MainViewController.  \
 \
 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
 \ul TODO:\ulnone   \
-- Work on the UpdateLatestIncomeView and View Controller.  \
-  - Make TODO list.  \
+- Add persistence so I can save the user's answer and bring it over to the MainViewController.  \
+  - Review the Core Data project and notes.\
+  - Add persistence to the project.  \
+  - Goal is to get data from the userIncome textfield and save it as a String.  \
+  - The textfield should auto-fill with the String saved in the persistent container.  \
+- Design the multi-add system.  \
+  - The table view is just there to show your previous entries and allow you to edit them easily.  \
+- Clean Up: \
+  - Truncate the result double so it only has two decimal places.  \
+  - Make sure when the user is typing in numbers they cannot have add a second decimal place.  \
+    - Check the Stanford Calculator for this.  \
+    - Try also reading this Google page -- https://www.google.com/search?sxsrf=ALeKk00PcbOAYW2reIIfSIm_k_6h_NpYBQ%3A1610266108256&source=hp&ei=_LX6X7ewDeKH_QaXs7zIDw&q=prevent+user+from+adding+two+decimal+places+swift&oq=prevent+user+from+adding+two+decimal+places+swift&gs_lcp=CgZwc3ktYWIQAzIHCCEQChCgAToECCMQJzoICC4QyQMQkQI6BQgAEJECOgUILhCxAzoICC4QsQMQgwE6BQgAELEDOggIABDJAxCRAjoCCAA6CAgAELEDEMkDOgoIABCxAxDJAxAKOgcIABCxAxAKOggIABCxAxCDAToFCAAQyQM6BggAEBYQHjoJCAAQyQMQFhAeOggIIRAWEB0QHjoFCCEQqwI6BQghEKABUB5Y-zlg9jpoA3AAeAGAAYUCiAGmJJIBBzIwLjIxLjGYAQCgAQGqAQdnd3Mtd2l6&sclient=psy-ab&ved=0ahUKEwi3nv_a9JDuAhXiQ98KHZcZD_kQ4dUDCAg&uact=5 \
+  - Find other places I need to polish.  \
+- Research and figure out dictation and seamless searching.  \
+  - Research iWatch integration.  \
 - Look over all in code TODOs and organize.  \
 - Consider reaching a wider audience.  Internationalization, blind, deaf, color blind, stuff.  \
   - https://developer.apple.com/localization/ \
   - https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/supporting_voiceover_in_your_app \
+- Figure out how to make it look nicer.  \
 - Read about designing human interfaces and how to get your app accepted onto the app store -- https://developer.apple.com/design/ \
+- Design and add the "Figure out your hourly labor value" thing as an update.  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0
 \cf0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0
@@ -56,6 +80,7 @@
   - Call that function when the calculation is complete or something. \
 - Fix DRY 2 -- A new convertedResult is used every time the unit of time is changed.   \
   - Probably need one or more "global" variables.  \
+- The time conversion IBActions are kind of a mess.  I dunno if it's a big deal but there are probably multiple ways to make it run or read more smoothly.  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0
 \cf0 - Finish any TODOs left in the code.  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
