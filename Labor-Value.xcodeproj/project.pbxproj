@@ -19,6 +19,7 @@
 		91D21588256A22B4004C8327 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91D21586256A22B4004C8327 /* LaunchScreen.storyboard */; };
 		91D21593256A22B4004C8327 /* Labor_ValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D21592256A22B4004C8327 /* Labor_ValueTests.swift */; };
 		91D2159E256A22B4004C8327 /* Labor_ValueUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D2159D256A22B4004C8327 /* Labor_ValueUITests.swift */; };
+		91D8F85E25B79D8300E61F79 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D8F85D25B79D8300E61F79 /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		91D21599256A22B4004C8327 /* Labor-ValueUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Labor-ValueUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91D2159D256A22B4004C8327 /* Labor_ValueUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Labor_ValueUITests.swift; sourceTree = "<group>"; };
 		91D2159F256A22B4004C8327 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		91D8F85D25B79D8300E61F79 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDefaultsManager.swift; path = "Labor-Value/Models/UserDefaultsManager.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				91C60F65256D9E350089B0C6 /* Calculations.swift */,
+				91D8F85D25B79D8300E61F79 /* UserDefaultsManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 			files = (
 				91D21583256A22B1004C8327 /* Labor_Value.xcdatamodeld in Sources */,
 				91D21579256A22B1004C8327 /* AppDelegate.swift in Sources */,
+				91D8F85E25B79D8300E61F79 /* UserDefaultsManager.swift in Sources */,
 				91D2157B256A22B1004C8327 /* SceneDelegate.swift in Sources */,
 				91C60F66256D9E350089B0C6 /* Calculations.swift in Sources */,
 				91BF53BD256AF4FF00F36455 /* MainViewController.swift in Sources */,

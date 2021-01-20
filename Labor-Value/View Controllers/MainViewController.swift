@@ -9,8 +9,11 @@ import UIKit
 
 class MainViewController: UIViewController {
     let theCalculationsModel = Calculations()
+    //MARK: User Defaults draft
+    //TODO: Replace with a call to the UserDefaultsManager class
+    //TODO: Add suite name
+    let userDefaults = UserDefaults()
     
-    //FIXME: FOR TESTING ONLY
     @IBOutlet weak var incomeTextField: UITextField!
     @IBOutlet weak var itemPriceTextField: UITextField!
     
@@ -25,7 +28,6 @@ class MainViewController: UIViewController {
     @IBOutlet weak var hoursToYearsButton: UIButton!
 
     var theResultString = ""
-    
     var theUnitOfTime = ""
     
     //Display the original number and use for time conversions.
@@ -35,13 +37,40 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //The result text should start empty every time.
-        //Could start or reset to instructions?
+        //On load, set the incomeTextField.text to whatever the userIncome is saved as.
+        if let value = userDefaults.value(forKey: "userIncome") as? String {
+            //MARK: Testing 1
+            print("I am setting the incomeTextField.text to \(value)")
+            incomeTextField.text = value
+        } else {
+            //MARK: Testing 1
+            //TODO: Should throw a proper error.  Do later.
+            print("There is an error with userDefaults.")
+        }
+        
+        //TODO: The result text should start empty every time.  Could start or reset to instructions?
         theResult.text = theResultString
         
         hideTimeConversionButtons(displaySwitch: true)
         
         hideKeyboardWhenTappedAround()
+    }
+    
+    //Did End On Exit IBAction
+    //TODO: Maybe try other editing stuff.  
+    @IBAction func updateUserIncome(_ sender: Any) {
+        //Take the incomeTextField.text and save it to User Defaults with the key userIncome.
+        userDefaults.setValue(incomeTextField.text, forKey: "userIncome")
+        
+        //MARK: Testing 1
+        if let value = userDefaults.value(forKey: "userIncome") as? String {
+            print("userIncome is now \(value)")
+        } else {
+            //Maybe this happened because the value was nil originally?  Weird... I've got a bad feeling about this.
+            print("I am a sad :(")
+        }
+        
+        print("Editing did end on exit.")
     }
     
     //Do the calculation here.

@@ -11,23 +11,21 @@
 \f1\b0 \ulnone  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
 \cf0 \ul Commit:\ulnone   \
-\
+Deleted the UserHourlyIncome entity from Core Data.  \
+Got rid of the comment stating the incomeTextField is for testing, which it is not.  \
+Added the UserDefaultsManager class to the project.  Will properly implement later.  \
+Added an initializer for UserDefaults in the MainViewController.  \
+Added an Editing Did End On Exit IBAction for the income textfield (updateUserIncome).  \
+updateUserIncome function takes the incomeTextField.text and saves it to userDefaults with the key "userIncome".  \
+Added a bunch of print statements MARKed Testing 1 used to make sure the user defaults stuff is working properly.  I'll clean them up later.  \
+Added an If Let in the MainViewController's viewDidLoad function that takes the userDefault "userIncome" value and assigns it to incomeTextField.text.  \
 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
 \ul TODO:\ulnone   \
-- Try Category/Extension.  \
-- TEST.  If successful commit.  If failure research the error.  \
-  - Possibly try again two more times with the other two kinds of entity creation stuff (manual and the other one).  \
+- Try using UserDefaults for persistence.  \
+  - Goal is to save the incomeTextField.text as a String called userHourlyIncome.  \
+  - On editingDidEndOnExit overwrite the userHourlyIncome String with whatever is in incomeTextField.text \
+  - On viewDidLoad incomeTextField.text = userHourlyIncome \
 \
-- AFTER successful commit: \
-- Generate the Core Data files.  \
-- Add the context to MainViewController \
-- \
-\
-- Add persistence so I can save the user's answer and bring it over to the MainViewController.  \
-  - Review the Core Data project and notes.\
-  - Add persistence to the project.  \
-  - Goal is to get data from the userIncome textfield and save it as a String.  \
-  - The textfield should auto-fill with the String saved in the persistent container.  \
 - Design the multi-add system.  \
   - The table view is just there to show your previous entries and allow you to edit them easily.  \
 - Clean Up: \
