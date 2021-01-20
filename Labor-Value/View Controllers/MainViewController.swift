@@ -11,8 +11,8 @@ class MainViewController: UIViewController {
     let theCalculationsModel = Calculations()
     //MARK: User Defaults draft
     //TODO: Replace with a call to the UserDefaultsManager class
-    //TODO: Add suite name
-    let userDefaults = UserDefaults()
+    
+    let savedUserIncomeSuiteDefault = UserDefaultsManager()
     
     @IBOutlet weak var incomeTextField: UITextField!
     @IBOutlet weak var itemPriceTextField: UITextField!
@@ -36,14 +36,11 @@ class MainViewController: UIViewController {
     //Load the view.  
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //On load, set the incomeTextField.text to whatever the userIncome is saved as.
-        if let value = userDefaults.value(forKey: "userIncome") as? String {
-            //MARK: Testing 1
-            print("I am setting the incomeTextField.text to \(value)")
+        //TODO: Double check, is this okay as is?
+        if let value = UserDefaultsManager.shared.savedUserIncomeSuiteDefault?.value(forKey: "userIncome") as? String {
             incomeTextField.text = value
         } else {
-            //MARK: Testing 1
             //TODO: Should throw a proper error.  Do later.
             print("There is an error with userDefaults.")
         }
@@ -56,21 +53,12 @@ class MainViewController: UIViewController {
         hideKeyboardWhenTappedAround()
     }
     
-    //Did End On Exit IBAction
-    //TODO: Maybe try other editing stuff.  
+    //Editing Did End
     @IBAction func updateUserIncome(_ sender: Any) {
         //Take the incomeTextField.text and save it to User Defaults with the key userIncome.
-        userDefaults.setValue(incomeTextField.text, forKey: "userIncome")
-        
-        //MARK: Testing 1
-        if let value = userDefaults.value(forKey: "userIncome") as? String {
-            print("userIncome is now \(value)")
-        } else {
-            //Maybe this happened because the value was nil originally?  Weird... I've got a bad feeling about this.
-            print("I am a sad :(")
-        }
-        
-        print("Editing did end on exit.")
+        print("Successfully updated userIncome")
+        //TODO: Double check, is this okay as is?
+        UserDefaultsManager.shared.savedUserIncomeSuiteDefault?.setValue(incomeTextField.text, forKey: "userIncome")
     }
     
     //Do the calculation here.
@@ -211,3 +199,5 @@ extension UIViewController {
         view.endEditing(true)
     }
 }
+
+//User Defaults code based off of https://www.youtube.com/watch?v=XzWBT6lIB3A and https://programmingwithswift.com/how-to-use-userdefaults-suites-with-swift/

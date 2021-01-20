@@ -8,5 +8,7 @@
 import Foundation
 
 class UserDefaultsManager {
-    let userDefaults = UserDefaults() 
+    static let shared = UserDefaultsManager()
+     
+    let savedUserIncomeSuiteDefault = UserDefaults(suiteName: "savedUserIncomeSuite")
 }
