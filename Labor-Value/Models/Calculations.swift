@@ -51,8 +51,7 @@ class Calculations {
      - Write a binary operation function for subtracting from the total number of items.
      */
     
-    //MARK: Functions for converting  from labor hours to minutes, days, etc.
-    //TODO: Fix I think
+    //MARK: Functions for converting from labor hours to minutes, days, etc.
     func workHoursToSeconds(hoursToWork: Double) -> Double {
         let secondsInAnHour = 3600.0
         
@@ -61,7 +60,6 @@ class Calculations {
         return hoursToSecondsResult
     }
     
-    //TODO: Fix I think 
     func workHoursToMinutes(hoursToWork: Double) -> Double {
         let minutesInAnHour = 60.0
         

@@ -33,13 +33,10 @@ class MainViewController: UIViewController {
     var theResultString = ""
     var theUnitOfTime = ""
     
-    //Display the original number and use for time conversions.
-    var savedResult = 0.0
-    
     //Load the view.  
     override func viewDidLoad() {
         super.viewDidLoad()
-        //On load, set the incomeTextField.text to whatever the userIncome is saved as.
+        //On load, set the incomeTextField.text to whatever value is saved in User Defaults.
         //TODO: Double check, is this okay as is?
         if let value = UserDefaultsManager.shared.savedUserIncomeSuiteDefault?.value(forKey: "userIncome") as? String {
             incomeTextField.text = value
@@ -72,18 +69,16 @@ class MainViewController: UIViewController {
         let theItemPrice = Double(itemPriceTextField.text ?? "0") ?? 0.0
         let theIncome = Double(incomeTextField.text ?? "0") ?? 0.0
             
-        //Save the calculated result
-        savedResult = theCalculationsModel.hoursToWork(itemPrice: theItemPrice, userIncome: theIncome)
-            
-        //Convert the savedResult into a string for theResult label.
-        theResultString = String(savedResult)
+        //MARK: Need for now
+        //Convert the result to a String for theResult label.
+        theResultString = String(theCalculationsModel.hoursToWork(itemPrice: theItemPrice, userIncome: theIncome))
         
         theUnitOfTime = "hours"
         
         hideTimeConversionButtons(displaySwitch: false)
             
         //Change theResult's label text to this using the previous calculations.
-        //MARK: DRY 1
+        //TODO: DRY 1
         theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
     }
     
@@ -96,6 +91,7 @@ class MainViewController: UIViewController {
         
         //Clear the textfield.
          //TODO: Add the correct currency format (eg. $0.00)
+        //MARK: Fix
         itemPriceTextField.text = "0"
     }
     
@@ -105,7 +101,8 @@ class MainViewController: UIViewController {
         
         hideTimeConversionButtons(displaySwitch: true)
         
-         //TODO: Add the correct currency format (eg. $0.00)
+        //TODO: Add the correct currency format (eg. $0.00)
+        //MARK: Fix
         itemPriceTextField.text = "0.00"
         
         //Make the result label disappear.
@@ -113,20 +110,15 @@ class MainViewController: UIViewController {
     }
  
     @IBAction func displayOriginalNumber(_ sender: Any) {
-        //I should never see this.
-        if savedResult == 0.0 {
-            theResult.text = "Error!"
-        }
-        
         theUnitOfTime = "hours"
         
-        //MARK: DRY 1
+        //TODO: DRY 1
         theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
     
     @IBAction func hoursToSeconds(_ sender: Any) {
-        //MARK: DRY 2
-        let convertedResult = String(theCalculationsModel.workHoursToSeconds(hoursToWork: savedResult))
+        //TODO: DRY 2
+        let convertedResult = String(theCalculationsModel.workHoursToSeconds(hoursToWork: theCalculationsModel.accumulator))
         
         theUnitOfTime = "seconds"
         
@@ -134,8 +126,8 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func hoursToMinutes(_ sender: Any) {
-        //MARK: DRY 2
-        let convertedResult = String(theCalculationsModel.workHoursToMinutes(hoursToWork: savedResult))
+        //TODO: DRY 2
+        let convertedResult = String(theCalculationsModel.workHoursToMinutes(hoursToWork: theCalculationsModel.accumulator))
         
         theUnitOfTime = "minutes"
         
@@ -143,8 +135,8 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func hoursToDays(_ sender: Any) {
-        //MARK: DRY 2
-        let convertedResult = String(theCalculationsModel.workHoursToDays(hoursToWork: savedResult))
+        //TODO: DRY 2
+        let convertedResult = String(theCalculationsModel.workHoursToDays(hoursToWork: theCalculationsModel.accumulator))
         
         theUnitOfTime = "days"
         
@@ -152,8 +144,8 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func hoursToWeeks(_ sender: Any) {
-        //MARK: DRY 2
-        let convertedResult = String(theCalculationsModel.workHoursToWeeks(hoursToWork: savedResult))
+        //TODO: DRY 2
+        let convertedResult = String(theCalculationsModel.workHoursToWeeks(hoursToWork: theCalculationsModel.accumulator))
         
         theUnitOfTime = "weeks"
         
@@ -161,8 +153,8 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func hoursToMonths(_ sender: Any) {
-        //MARK: DRY 2
-        let convertedResult = String(theCalculationsModel.workHoursToMonths(hoursToWork: savedResult))
+        //TODO: DRY 2
+        let convertedResult = String(theCalculationsModel.workHoursToMonths(hoursToWork: theCalculationsModel.accumulator))
         
         theUnitOfTime = "months"
         
@@ -170,8 +162,8 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func hoursToYears(_ sender: Any) {
-        //MARK: DRY 2
-        let convertedResult = String(theCalculationsModel.workHoursToYears(hoursToWork: savedResult))
+        //TODO: DRY 2
+        let convertedResult = String(theCalculationsModel.workHoursToYears(hoursToWork: theCalculationsModel.accumulator))
         
         theUnitOfTime = "years"
         
