@@ -20,7 +20,6 @@ class Calculations {
         return accumulator
     }
     
-    //MARK: Not set up yet in any way.
     //Binary operation for adding multiple items.
     func addMultipleItemPrices(newEntry: Double, currentTotal: Double) -> Double {
         print("Before adding an item", accumulator)

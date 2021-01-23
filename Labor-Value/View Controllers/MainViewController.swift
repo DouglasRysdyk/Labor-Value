@@ -9,7 +9,6 @@ import UIKit
 
 class MainViewController: UIViewController {
     let theCalculationsModel = Calculations()
-    
     let savedUserIncomeSuiteDefault = UserDefaultsManager()
     
     @IBOutlet weak var incomeTextField: UITextField! {
@@ -36,9 +35,10 @@ class MainViewController: UIViewController {
     //Load the view.  
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //On load, set the incomeTextField.text to whatever value is saved in User Defaults.
-        //TODO: Double check, is this okay as is?
         if let value = UserDefaultsManager.shared.savedUserIncomeSuiteDefault?.value(forKey: "userIncome") as? String {
+            //MARK: Fix!
             incomeTextField.text = value
         } else {
             //TODO: Should throw a proper error.  Do later.
@@ -46,7 +46,7 @@ class MainViewController: UIViewController {
         }
         
         //TODO: The result text should start empty every time.  Could start or reset to instructions?
-        theResult.text = theResultString
+        theResult.text = "PLACEHOLDER: Should start with instructions."
         
         hideTimeConversionButtons(displaySwitch: true)
         
@@ -57,7 +57,6 @@ class MainViewController: UIViewController {
     @IBAction func updateUserIncome(_ sender: Any) {
         //Take the incomeTextField.text and save it to User Defaults with the key userIncome.
         print("Successfully updated userIncome")
-        //TODO: Double check, is this okay as is?
         UserDefaultsManager.shared.savedUserIncomeSuiteDefault?.setValue(incomeTextField.text, forKey: "userIncome")
     }
     
@@ -65,20 +64,12 @@ class MainViewController: UIViewController {
     @IBAction func itemPriceTextFieldEditingChanged(_ sender: UITextField) {
         //Editing Changed Source -- https://youtu.be/XUH1O1BTUvo?t=100 till 6:26
         
-        //Convert the textfield text to doubles.
-        let theItemPrice = Double(itemPriceTextField.text ?? "0") ?? 0.0
-        let theIncome = Double(incomeTextField.text ?? "0") ?? 0.0
-            
-        //MARK: Need for now
-        //Convert the result to a String for theResult label.
-        theResultString = String(theCalculationsModel.hoursToWork(itemPrice: theItemPrice, userIncome: theIncome))
+        theResultString = calculateHourlyLaborValue()
         
         theUnitOfTime = "hours"
         
         hideTimeConversionButtons(displaySwitch: false)
-            
-        //Change theResult's label text to this using the previous calculations.
-        //TODO: DRY 1
+        
         theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
     }
     
@@ -90,9 +81,7 @@ class MainViewController: UIViewController {
         print("Add Another Item function accumulator = ", theCalculationsModel.accumulator)
         
         //Clear the textfield.
-         //TODO: Add the correct currency format (eg. $0.00)
-        //MARK: Fix
-        itemPriceTextField.text = "0"
+        itemPriceTextField.text = String(format: "%.02f", 0)
     }
     
     @IBAction func reset(_ sender: Any) {
@@ -101,73 +90,66 @@ class MainViewController: UIViewController {
         
         hideTimeConversionButtons(displaySwitch: true)
         
-        //TODO: Add the correct currency format (eg. $0.00)
-        //MARK: Fix
-        itemPriceTextField.text = "0.00"
+        itemPriceTextField.text = String(format: "%.02f", theCalculationsModel.accumulator)
         
         //Make the result label disappear.
         theResult.text = ""
     }
- 
+
     @IBAction func displayOriginalNumber(_ sender: Any) {
+        theResultString = calculateHourlyLaborValue()
+        
         theUnitOfTime = "hours"
         
-        //TODO: DRY 1
         theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
     
     @IBAction func hoursToSeconds(_ sender: Any) {
-        //TODO: DRY 2
-        let convertedResult = String(theCalculationsModel.workHoursToSeconds(hoursToWork: theCalculationsModel.accumulator))
+        theResultString = String(format: "%.0f", theCalculationsModel.workHoursToSeconds(hoursToWork: theCalculationsModel.accumulator))
         
         theUnitOfTime = "seconds"
         
-        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
     
     @IBAction func hoursToMinutes(_ sender: Any) {
-        //TODO: DRY 2
-        let convertedResult = String(theCalculationsModel.workHoursToMinutes(hoursToWork: theCalculationsModel.accumulator))
+        theResultString = String(format: "%.0f", theCalculationsModel.workHoursToMinutes(hoursToWork: theCalculationsModel.accumulator))
         
         theUnitOfTime = "minutes"
         
-        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
     
     @IBAction func hoursToDays(_ sender: Any) {
-        //TODO: DRY 2
-        let convertedResult = String(theCalculationsModel.workHoursToDays(hoursToWork: theCalculationsModel.accumulator))
+        theResultString = String(format: "%.0f", theCalculationsModel.workHoursToDays(hoursToWork: theCalculationsModel.accumulator))
         
         theUnitOfTime = "days"
         
-        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
     
     @IBAction func hoursToWeeks(_ sender: Any) {
-        //TODO: DRY 2
-        let convertedResult = String(theCalculationsModel.workHoursToWeeks(hoursToWork: theCalculationsModel.accumulator))
+        theResultString = String(format: "%.0f", theCalculationsModel.workHoursToWeeks(hoursToWork: theCalculationsModel.accumulator))
         
         theUnitOfTime = "weeks"
         
-        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
     
     @IBAction func hoursToMonths(_ sender: Any) {
-        //TODO: DRY 2
-        let convertedResult = String(theCalculationsModel.workHoursToMonths(hoursToWork: theCalculationsModel.accumulator))
+        theResultString = String(format: "%.0f", theCalculationsModel.workHoursToMonths(hoursToWork: theCalculationsModel.accumulator))
         
         theUnitOfTime = "months"
         
-        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
     
     @IBAction func hoursToYears(_ sender: Any) {
-        //TODO: DRY 2
-        let convertedResult = String(theCalculationsModel.workHoursToYears(hoursToWork: theCalculationsModel.accumulator))
+        theResultString = String(format: "%.0f", theCalculationsModel.workHoursToYears(hoursToWork: theCalculationsModel.accumulator))
         
         theUnitOfTime = "years"
         
-        theResult.text = "It would take \(convertedResult) \(theUnitOfTime) to pay for this"
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
     
     func hideTimeConversionButtons(displaySwitch: Bool) {
@@ -178,6 +160,20 @@ class MainViewController: UIViewController {
         hoursToWeeksButton.isHidden = displaySwitch
         hoursToMonthsButton.isHidden = displaySwitch
         hoursToYearsButton.isHidden = displaySwitch
+    }
+    
+    func calculateHourlyLaborValue() -> String {
+        //Convert the textfield text to doubles.
+        let theItemPrice = Double(itemPriceTextField.text ?? "0") ?? 0.0
+        let theIncome = Double(incomeTextField.text ?? "0") ?? 0.0
+    
+        //Convert the result to a String for theResult label.
+        //TODO: Make anything less than 0 human legible (like say "it's less than half an hour" or something).
+        //I don't honestly know how I'll do this.
+        //I'll need a switch or something with different responses loaded up.
+        theResultString = String(format: "%.0f", theCalculationsModel.hoursToWork(itemPrice: theItemPrice, userIncome: theIncome))
+    
+        return theResultString
     }
 }
 
@@ -219,3 +215,23 @@ extension UITextField {
     @objc func doneButtonTapped() { self.resignFirstResponder() }
     @objc func cancelButtonTapped() { self.resignFirstResponder() }
 }
+
+//MARK: Trash?
+//Source -- https://stackoverflow.com/questions/33527662/add-remove-currency-formatting-in-swift
+//Use example: "74719.4048014544".currencyFormatting() // $74,719.40
+extension String {
+    // formatting text for currency textField
+    func stringCurrencyFormatting() -> String {
+        if let value = Double(self) {
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .currency
+            formatter.maximumFractionDigits = 2
+            if let theString = formatter.string(for: value) {
+                return theString
+            }
+        }
+        return ""
+    }
+}
+ 
+
