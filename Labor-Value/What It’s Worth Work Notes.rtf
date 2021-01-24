@@ -11,25 +11,17 @@
 \f1\b0 \ulnone  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
 \cf0 \ul Commit:\ulnone   \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
-\cf0  \
-\'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
-\cf0 \ul TODO:\ulnone   \cb2 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 - Force everything to two decimal places.  \
-- Put the dollar sign outside of the textfield.  \
 \
+\'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
+\ul TODO:\ulnone   \cb2 \
 - Create a function that parses the textfield and deletes any extra decimal points.  \
+  - Trying this code snippet -- https://stackoverflow.com/questions/27883171/how-do-you-limit-only-1-decimal-entry-in-a-uitextfield-in-swift-for-ios8/27884715 \
 \
 - There's a few little edge cases I need to fix.  \
   - If the user changes the userIncome while there is still an item price then no calculation is run.  \
   - I hate it when stuff says things like "1 weeks."  You mean that singularly right?  \
   - I want things to say like "Less than five minutes" or "Less than a month"  or "Less than a half an hour."  That's just more user friendly.  \cb1 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
-\cf0 \
-- Truncate the result double so it only has two decimal places.  \
-  - https://stackoverflow.com/questions/28652617/easily-truncating-a-double-swift?lq=1 \
+\
 - Make sure when the user is typing in numbers they cannot have add a second decimal place.  \
   - Check the Stanford Calculator for this.  \
   - Try also reading this Google page -- https://www.google.com/search?sxsrf=ALeKk00PcbOAYW2reIIfSIm_k_6h_NpYBQ%3A1610266108256&source=hp&ei=_LX6X7ewDeKH_QaXs7zIDw&q=prevent+user+from+adding+two+decimal+places+swift&oq=prevent+user+from+adding+two+decimal+places+swift&gs_lcp=CgZwc3ktYWIQAzIHCCEQChCgAToECCMQJzoICC4QyQMQkQI6BQgAEJECOgUILhCxAzoICC4QsQMQgwE6BQgAELEDOggIABDJAxCRAjoCCAA6CAgAELEDEMkDOgoIABCxAxDJAxAKOgcIABCxAxAKOggIABCxAxCDAToFCAAQyQM6BggAEBYQHjoJCAAQyQMQFhAeOggIIRAWEB0QHjoFCCEQqwI6BQghEKABUB5Y-zlg9jpoA3AAeAGAAYUCiAGmJJIBBzIwLjIxLjGYAQCgAQGqAQdnd3Mtd2l6&sclient=psy-ab&ved=0ahUKEwi3nv_a9JDuAhXiQ98KHZcZD_kQ4dUDCAg&uact=5 \
@@ -53,13 +45,12 @@
   - Add to the overall TODO list.  \
   - Focus on optimizations, legibility, and abstraction.  \
 - Look over all in code TODOs and organize.  \
+- See if there is any code I can make snippets of to save time in the future.  \
 \
 Updates: \cb2 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 - Come up with a plan for keeping internationalization as an update for later.  \
+- Come up with a plan for keeping internationalization as an update for later.  \
   - Will likely include a more thorough separation of display logic and calculation logic.  \cb1 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
-\cf0 - Design and add the "Figure out your hourly labor value" thing as an update.  \
+- Design and add the "Figure out your hourly labor value" thing as an update.  \
 - Design the multi-add system.  \
   - The table view is just there to show your previous entries and allow you to edit them easily.  \
 - Consider reaching a wider audience.  Internationalization, blind, deaf, color blind, stuff.  \

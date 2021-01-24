@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, UITextFieldDelegate {
     let theCalculationsModel = Calculations()
     let savedUserIncomeSuiteDefault = UserDefaultsManager()
     
@@ -36,9 +36,11 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.incomeTextField.delegate = self
+        self.itemPriceTextField.delegate = self
+        
         //On load, set the incomeTextField.text to whatever value is saved in User Defaults.
         if let value = UserDefaultsManager.shared.savedUserIncomeSuiteDefault?.value(forKey: "userIncome") as? String {
-            //MARK: Fix!
             incomeTextField.text = value
         } else {
             //TODO: Should throw a proper error.  Do later.
@@ -175,6 +177,19 @@ class MainViewController: UIViewController {
     
         return theResultString
     }
+    
+    //Source (2nd Answer) -- https://stackoverflow.com/questions/27883171/how-do-you-limit-only-1-decimal-entry-in-a-uitextfield-in-swift-for-ios8/27884715
+    //Need UITextFieldDelegate, and in viewDidLoad self.textField.delegate = self
+    func textField(_ textField: UITextField,shouldChangeCharactersIn range: NSRange,replacementString string: String) -> Bool {
+        //MARK: Force unwrap
+        let countdots = (textField.text?.components(separatedBy: ".").count)! - 1
+
+        if countdots > 0 && string == "."
+        {
+            return false
+        }
+        return true
+    }
 }
 
 //Dismiss the keyboard by tapping anywhere on the screen other than the keyboard.
@@ -215,23 +230,3 @@ extension UITextField {
     @objc func doneButtonTapped() { self.resignFirstResponder() }
     @objc func cancelButtonTapped() { self.resignFirstResponder() }
 }
-
-//MARK: Trash?
-//Source -- https://stackoverflow.com/questions/33527662/add-remove-currency-formatting-in-swift
-//Use example: "74719.4048014544".currencyFormatting() // $74,719.40
-extension String {
-    // formatting text for currency textField
-    func stringCurrencyFormatting() -> String {
-        if let value = Double(self) {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .currency
-            formatter.maximumFractionDigits = 2
-            if let theString = formatter.string(for: value) {
-                return theString
-            }
-        }
-        return ""
-    }
-}
- 
-
