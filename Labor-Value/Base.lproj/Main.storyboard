@@ -45,6 +45,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
+                                    <action selector="incomeTextFieldEditingChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="G8Y-U9-HGL"/>
                                     <action selector="updateUserIncome:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="Qpg-G8-fX2"/>
                                 </connections>
                             </textField>

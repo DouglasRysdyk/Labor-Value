@@ -62,7 +62,20 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         UserDefaultsManager.shared.savedUserIncomeSuiteDefault?.setValue(incomeTextField.text, forKey: "userIncome")
     }
     
-    //Do the calculation here.
+    //Do the calculation if the user changes their income.
+    //Editing Changed IBAction
+    @IBAction func incomeTextFieldEditingChanged(_ sender: Any) {
+        theResultString = calculateHourlyLaborValue()
+        
+        theUnitOfTime = "hours"
+        
+        hideTimeConversionButtons(displaySwitch: false)
+        
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+    }
+    
+    //Do the calculation if the user changes the item's price.
+    //Editing Changed IBAction
     @IBAction func itemPriceTextFieldEditingChanged(_ sender: UITextField) {
         //Editing Changed Source -- https://youtu.be/XUH1O1BTUvo?t=100 till 6:26
         
