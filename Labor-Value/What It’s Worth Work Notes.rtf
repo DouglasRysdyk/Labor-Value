@@ -14,13 +14,10 @@
 \
 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
 \ul TODO:\ulnone   \
+- When the incomeTextfield or the itemPriceText are empty remove the result text.  \
 - Make the result text more human readable.  \
   - EG. "Less than a week" and "Less than 4 minutes."  "Less than a second." \
   - I suspect this will take a lot of work.  \
-- When the user starts the program for the first time there will not be anything in user defaults.  I don't know if this is really a problem.  \
-- Should the result text start as a default thing like instructions?  \
-  - Talk with Dad about this.  \
-- When the incomeTextfield or the itemPriceText are empty remove the result text.  \
 - Add functionality for the keypad cancel button.  \
   - Save whatever the String is before the user starts editing (I guess when they first click on the textfield).  \
   - If the user hits the cancel button then set the textfield.text to the saved String.  \
@@ -47,6 +44,7 @@
 - Look into a user complaint form thing.  \
 \
 - Show to Dad and go over release idea.  \
+  - Should the result text start as a default thing like instructions?  \
   - I think I should make a WatchOS app plus some updates, then release a second update.  \
   - Then I think I should make the whole solution as seamless as I can by beginning with SiriKit stuff.  \
     - This order because once I have data moving between the phone and watch apps I'll have a better idea of overall data flow.  \
@@ -64,10 +62,14 @@ Updates: \cb2 \
 - Consider reaching a wider audience.  Internationalization, blind, deaf, color blind, stuff.  \
   - https://developer.apple.com/localization/ \
   - https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/supporting_voiceover_in_your_app \
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
+\cf0 \ul Notes:\ulnone  \
+- When the user starts the program for the first time there will not be anything in user defaults.  I don't know if this is really a problem.  \
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0
-\cf0 \
 
-\f0\b \ul SORT:
+\f0\b \cf0 \ul SORT:
 \f1\b0 \ulnone  \
 - Everything until the two dash separators is old.  \
 __________________________________________________________________________________________________________________________________\

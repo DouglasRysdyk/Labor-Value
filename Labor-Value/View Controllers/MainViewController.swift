@@ -12,11 +12,21 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     let savedUserIncomeSuiteDefault = UserDefaultsManager()
     
     @IBOutlet weak var incomeTextField: UITextField! {
-        didSet { incomeTextField?.addDoneCancelToolbar() }
+        didSet {
+            incomeTextField?.doneButtonTapped()
+            incomeTextField?.addDoneCancelToolbar(onCancel: (target: self, action: #selector(cancelButtonTappedIncomeTextField)))
+        }
     }
     
     @IBOutlet weak var itemPriceTextField: UITextField! {
         didSet { itemPriceTextField?.addDoneCancelToolbar() }
+        /*
+         
+             didSet {
+                 incomeTextField?.doneButtonTapped()
+                 incomeTextField?.addDoneCancelToolbar(onCancel: (target: self, action: #selector(cancelButtonTappedIncomeTextField)))
+             }
+         */
     }
     
     @IBOutlet weak var theResult: UILabel!
@@ -28,6 +38,9 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var hoursToWeeksButton: UIButton!
     @IBOutlet weak var hoursToMonthsButton: UIButton!
     @IBOutlet weak var hoursToYearsButton: UIButton!
+    
+    //Save the incomeTextField.text before the user saves or cancels their input.
+    var originalIncomeText = ""
 
     var theResultString = ""
     var theUnitOfTime = ""
@@ -43,6 +56,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         if let value = UserDefaultsManager.shared.savedUserIncomeSuiteDefault?.value(forKey: "userIncome") as? String {
             incomeTextField.text = value
         } else {
+            //MARK: "0.00"
             incomeTextField.text = "0.00"
             print("User defaults is empty.")
         }
@@ -52,6 +66,15 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         hideTimeConversionButtons(displaySwitch: true)
         
         hideKeyboardWhenTappedAround()
+    }
+    
+    //Save the original incomeTextField.text entry before the user overwrites it.
+    //Editing Did Begin
+    @IBAction func saveTheOriginalIncomeText(_ sender: Any) {
+        //MARK: "0.00"
+        originalIncomeText = incomeTextField.text ?? "0.00"
+        
+        print("originalIncomeText = ", originalIncomeText)
     }
     
     //Editing Did End
@@ -174,6 +197,13 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         hoursToWeeksButton.isHidden = displaySwitch
         hoursToMonthsButton.isHidden = displaySwitch
         hoursToYearsButton.isHidden = displaySwitch
+    }
+    
+    //MARK: Working on
+    @objc func cancelButtonTappedIncomeTextField() {
+        incomeTextField.text = originalIncomeText
+        
+        incomeTextField.resignFirstResponder()
     }
     
     func calculateHourlyLaborValue() -> String {
