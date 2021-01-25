@@ -43,12 +43,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         if let value = UserDefaultsManager.shared.savedUserIncomeSuiteDefault?.value(forKey: "userIncome") as? String {
             incomeTextField.text = value
         } else {
-            //TODO: Should throw a proper error.  Do later.
-            print("There is an error with userDefaults.")
+            incomeTextField.text = "0.00"
+            print("User defaults is empty.")
         }
         
-        //TODO: The result text should start empty every time.  Could start or reset to instructions?
-        theResult.text = "PLACEHOLDER: Should start with instructions."
+        theResult.text = theResultString
         
         hideTimeConversionButtons(displaySwitch: true)
         
@@ -184,8 +183,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     
         //Convert the result to a String for theResult label.
         //TODO: Make anything less than 0 human legible (like say "it's less than half an hour" or something).
-        //I don't honestly know how I'll do this.
-        //I'll need a switch or something with different responses loaded up.
         theResultString = String(format: "%.0f", theCalculationsModel.hoursToWork(itemPrice: theItemPrice, userIncome: theIncome))
     
         return theResultString
@@ -197,8 +194,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         //MARK: Force unwrap
         let countdots = (textField.text?.components(separatedBy: ".").count)! - 1
 
-        if countdots > 0 && string == "."
-        {
+        if countdots > 0 && string == "." {
             return false
         }
         return true

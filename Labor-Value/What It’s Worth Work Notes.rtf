@@ -14,28 +14,42 @@
 \
 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
 \ul TODO:\ulnone   \
-- Fix this error "Can't find keyplane that supports type 8 for keyboard iPhone-PortraitTruffle-DecimalPad; using 25942_PortraitTruffle_iPhone-Simple-Pad_Default" \
-  - https://developer.apple.com/forums/thread/126616 \
-- If userIncome in User Defaults is nil then set textfield.text to "0.00".  \
+- Make the result text more human readable.  \
+  - EG. "Less than a week" and "Less than 4 minutes."  "Less than a second." \
+  - I suspect this will take a lot of work.  \
+- When the user starts the program for the first time there will not be anything in user defaults.  I don't know if this is really a problem.  \
+- Should the result text start as a default thing like instructions?  \
+  - Talk with Dad about this.  \
+- When the incomeTextfield or the itemPriceText are empty remove the result text.  \
 - Add functionality for the keypad cancel button.  \
   - Save whatever the String is before the user starts editing (I guess when they first click on the textfield).  \
   - If the user hits the cancel button then set the textfield.text to the saved String.  \
   - This String is not persistent.  \
   - Check this again -- https://stackoverflow.com/questions/38133853/how-to-add-a-return-key-on-a-decimal-pad-in-swift \
 \
-- Research and figure out dictation and seamless searching.  \
-- Research iWatch integration.  \
-\
-- Figure out how to make it look nicer.  \
+- Look for code snippets to save.  \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
+\cf0 \
 - Read about designing human interfaces and how to get your app accepted onto the app store -- https://developer.apple.com/design/ \
+- Auto-layout work.  Make the Main view look nice.  \
+  - Draw what you want it to look like.  \
+  - Modify everything to look like your design.  \
 \
-- Find places I need to polish.  \
-  - Add to the overall TODO list.  \
-  - Focus on optimizations, legibility, and abstraction.  \cb2 \
-  - I hate it when stuff says things like "1 weeks."  You mean that singularly right?  \
-  - I want things to say like "Less than five minutes" or "Less than a month"  or "Less than a half an hour."  That's just more user friendly.  \cb1 \
-- Look over all in code TODOs and organize.  \
-- See if there is any code I can make snippets of to save time in the future.  \
+- Constrain everything.  \
+- Try different phone sizes.  \
+\
+- Fix any remaining errors.  \
+- Fix this error "Can't find keyplane that supports type 8 for keyboard iPhone-PortraitTruffle-DecimalPad; using 25942_PortraitTruffle_iPhone-Simple-Pad_Default" \
+  - https://developer.apple.com/forums/thread/126616 \
+\
+- Look into adding ads.  \
+\
+- Look into a user complaint form thing.  \
+\
+- Show to Dad and go over release idea.  \
+  - I think I should make a WatchOS app plus some updates, then release a second update.  \
+  - Then I think I should make the whole solution as seamless as I can by beginning with SiriKit stuff.  \
+    - This order because once I have data moving between the phone and watch apps I'll have a better idea of overall data flow.  \
 \
 Updates: \cb2 \
 - Come up with a plan for keeping internationalization as an update for later.  \
@@ -43,6 +57,10 @@ Updates: \cb2 \
 - Design and add the "Figure out your hourly labor value" thing as an update.  \
 - Design the multi-add system.  \
   - The table view is just there to show your previous entries and allow you to edit them easily.  \
+- Add SiriKit.  \
+  - SiriKit Tutorial -- https://www.youtube.com/watch?v=_PGgTm1TWR8 \
+- Add WatchOS support.  \
+  - WatchOS Tutorial -- https://www.youtube.com/watch?v=Y8A_Wkcx83Q\
 - Consider reaching a wider audience.  Internationalization, blind, deaf, color blind, stuff.  \
   - https://developer.apple.com/localization/ \
   - https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/supporting_voiceover_in_your_app \
