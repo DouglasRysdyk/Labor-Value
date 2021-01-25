@@ -19,14 +19,10 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBOutlet weak var itemPriceTextField: UITextField! {
-        didSet { itemPriceTextField?.addDoneCancelToolbar() }
-        /*
-         
-             didSet {
-                 incomeTextField?.doneButtonTapped()
-                 incomeTextField?.addDoneCancelToolbar(onCancel: (target: self, action: #selector(cancelButtonTappedIncomeTextField)))
-             }
-         */
+        didSet {
+            itemPriceTextField?.doneButtonTapped()
+            itemPriceTextField?.addDoneCancelToolbar(onCancel: (target: self, action: #selector(cancelButtonTappeditemPriceTextField)))
+        }
     }
     
     @IBOutlet weak var theResult: UILabel!
@@ -39,8 +35,9 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var hoursToMonthsButton: UIButton!
     @IBOutlet weak var hoursToYearsButton: UIButton!
     
-    //Save the incomeTextField.text before the user saves or cancels their input.
+    //Save the incomeTextField.text and itemPriceTextField.text before the user saves or cancels their input.
     var originalIncomeText = ""
+    var originalItemPriceText = ""
 
     var theResultString = ""
     var theUnitOfTime = ""
@@ -73,8 +70,15 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBAction func saveTheOriginalIncomeText(_ sender: Any) {
         //MARK: "0.00"
         originalIncomeText = incomeTextField.text ?? "0.00"
+    }
+    
+    //Save the original itemPriceTextField.text entry before the user overwrites it.
+    //Editing Did Begin
+    @IBAction func saveTheOriginalItemPriceText(_ sender: Any) {
+        //MARK: "0.00"
+        originalItemPriceText = itemPriceTextField.text ?? "0.00"
         
-        print("originalIncomeText = ", originalIncomeText)
+        print("originalItemPriceText = ", originalItemPriceText)
     }
     
     //Editing Did End
@@ -199,11 +203,16 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         hoursToYearsButton.isHidden = displaySwitch
     }
     
-    //MARK: Working on
     @objc func cancelButtonTappedIncomeTextField() {
         incomeTextField.text = originalIncomeText
         
         incomeTextField.resignFirstResponder()
+    }
+    
+    @objc func cancelButtonTappeditemPriceTextField() {
+        itemPriceTextField.text = originalItemPriceText
+        
+        itemPriceTextField.resignFirstResponder()
     }
     
     func calculateHourlyLaborValue() -> String {
