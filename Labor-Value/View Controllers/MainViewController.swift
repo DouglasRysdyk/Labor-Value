@@ -66,14 +66,14 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     }
     
     //Save the original incomeTextField.text entry before the user overwrites it.
-    //Editing Did Begin
+    //Editing Did Begin IBAction
     @IBAction func saveTheOriginalIncomeText(_ sender: Any) {
         //MARK: "0.00"
         originalIncomeText = incomeTextField.text ?? "0.00"
     }
     
     //Save the original itemPriceTextField.text entry before the user overwrites it.
-    //Editing Did Begin
+    //Editing Did Begin IBAction
     @IBAction func saveTheOriginalItemPriceText(_ sender: Any) {
         //MARK: "0.00"
         originalItemPriceText = itemPriceTextField.text ?? "0.00"
@@ -81,7 +81,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         print("originalItemPriceText = ", originalItemPriceText)
     }
     
-    //Editing Did End
+    //Editing Did End IBAction
     @IBAction func updateUserIncome(_ sender: Any) {
         //Take the incomeTextField.text and save it to User Defaults with the key userIncome.
         print("Successfully updated userIncome")
@@ -96,8 +96,13 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         theUnitOfTime = "hours"
         
         hideTimeConversionButtons(displaySwitch: false)
-        
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+    
+        if theResultString == "nan" || theResultString == "inf" {
+            theResult.text = ""
+            hideTimeConversionButtons(displaySwitch: true)
+        } else {
+            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+        }
     }
     
     //Do the calculation if the user changes the item's price.
@@ -111,7 +116,12 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         
         hideTimeConversionButtons(displaySwitch: false)
         
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+        if theResultString == "nan" || theResultString == "inf" {
+            theResult.text = ""
+            hideTimeConversionButtons(displaySwitch: true)
+        } else {
+            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+        }
     }
     
     @IBAction func addAnotherItem(_ sender: Any) {

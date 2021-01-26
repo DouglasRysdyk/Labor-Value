@@ -15,7 +15,8 @@ class Calculations {
         //How many hours of work it takes to pay for an item.
         accumulator = itemPrice / userIncome
         
-        print("TEST: totalItems = ", accumulator)
+        //Commented out because I know this works and this is getting distracting.  Keeping in case I need to bug fix.  
+        //print("TEST: totalItems = ", accumulator)
         
         return accumulator
     }
