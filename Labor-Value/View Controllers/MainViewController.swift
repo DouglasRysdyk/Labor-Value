@@ -93,7 +93,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBAction func incomeTextFieldEditingChanged(_ sender: Any) {
         theResultString = calculateHourlyLaborValue()
         
-        theUnitOfTime = "hours"
+        if theResultString == "1" {
+            theUnitOfTime = "hour"
+        } else {
+            theUnitOfTime = "hours"
+        }
         
         hideTimeConversionButtons(displaySwitch: false)
     
@@ -112,7 +116,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         
         theResultString = calculateHourlyLaborValue()
         
-        theUnitOfTime = "hours"
+        if theResultString == "1" {
+            theUnitOfTime = "hour"
+        } else {
+            theUnitOfTime = "hours"
+        }
         
         hideTimeConversionButtons(displaySwitch: false)
         
@@ -150,7 +158,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBAction func displayOriginalNumber(_ sender: Any) {
         theResultString = calculateHourlyLaborValue()
         
-        theUnitOfTime = "hours"
+        if theResultString == "1" {
+            theUnitOfTime = "hour"
+        } else {
+            theUnitOfTime = "hours"
+        }
         
         theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
@@ -158,7 +170,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBAction func hoursToSeconds(_ sender: Any) {
         theResultString = String(format: "%.0f", theCalculationsModel.workHoursToSeconds(hoursToWork: theCalculationsModel.accumulator))
         
-        theUnitOfTime = "seconds"
+        if theResultString == "1" {
+            theUnitOfTime = "second"
+        } else {
+            theUnitOfTime = "seconds"
+        }
         
         theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
@@ -166,7 +182,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBAction func hoursToMinutes(_ sender: Any) {
         theResultString = String(format: "%.0f", theCalculationsModel.workHoursToMinutes(hoursToWork: theCalculationsModel.accumulator))
         
-        theUnitOfTime = "minutes"
+        if theResultString == "1" {
+            theUnitOfTime = "minute"
+        } else {
+            theUnitOfTime = "minutes"
+        }
         
         theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
@@ -174,7 +194,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBAction func hoursToDays(_ sender: Any) {
         theResultString = String(format: "%.0f", theCalculationsModel.workHoursToDays(hoursToWork: theCalculationsModel.accumulator))
         
-        theUnitOfTime = "days"
+        if theResultString == "1" {
+            theUnitOfTime = "day"
+        } else {
+            theUnitOfTime = "days"
+        }
         
         theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
@@ -182,7 +206,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBAction func hoursToWeeks(_ sender: Any) {
         theResultString = String(format: "%.0f", theCalculationsModel.workHoursToWeeks(hoursToWork: theCalculationsModel.accumulator))
         
-        theUnitOfTime = "weeks"
+        if theResultString == "1" {
+            theUnitOfTime = "week"
+        } else {
+            theUnitOfTime = "weeks"
+        }
         
         theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
@@ -190,7 +218,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBAction func hoursToMonths(_ sender: Any) {
         theResultString = String(format: "%.0f", theCalculationsModel.workHoursToMonths(hoursToWork: theCalculationsModel.accumulator))
         
-        theUnitOfTime = "months"
+        if theResultString == "1" {
+            theUnitOfTime = "month"
+        } else {
+            theUnitOfTime = "months"
+        }
         
         theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
@@ -198,7 +230,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBAction func hoursToYears(_ sender: Any) {
         theResultString = String(format: "%.0f", theCalculationsModel.workHoursToYears(hoursToWork: theCalculationsModel.accumulator))
         
-        theUnitOfTime = "years"
+        if theResultString == "1" {
+            theUnitOfTime = "year"
+        } else {
+            theUnitOfTime = "years"
+        }
         
         theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
     }
