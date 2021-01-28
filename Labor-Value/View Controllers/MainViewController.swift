@@ -11,6 +11,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     let theCalculationsModel = Calculations()
     let savedUserIncomeSuiteDefault = UserDefaultsManager()
     
+    let unitOfTimePickerViewData = ["Seconds", "Minutes", "Hours", "Days", "Weeks", "Months", "Years"]
+    
     @IBOutlet weak var incomeTextField: UITextField! {
         didSet {
             incomeTextField?.doneButtonTapped()
@@ -26,6 +28,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBOutlet weak var theResult: UILabel!
+    
+    @IBOutlet weak var unitOfTimePicker: UIPickerView!
     
     @IBOutlet weak var hoursToSecondsButton: UIButton!
     @IBOutlet weak var hoursToMinutesButton: UIButton!
@@ -49,6 +53,9 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         self.incomeTextField.delegate = self
         self.itemPriceTextField.delegate = self
         
+        unitOfTimePicker.dataSource = self
+        unitOfTimePicker.delegate = self
+        
         //On load, set the incomeTextField.text to whatever value is saved in User Defaults.
         if let value = UserDefaultsManager.shared.savedUserIncomeSuiteDefault?.value(forKey: "userIncome") as? String {
             incomeTextField.text = value
@@ -61,6 +68,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         theResult.text = theResultString
         
         hideTimeConversionButtons(displaySwitch: true)
+        unitOfTimePicker.isHidden = true
         
         hideKeyboardWhenTappedAround()
     }
@@ -100,10 +108,12 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         }
         
         hideTimeConversionButtons(displaySwitch: false)
+        unitOfTimePicker.isHidden = false
     
         if theResultString == "nan" || theResultString == "inf" {
             theResult.text = ""
             hideTimeConversionButtons(displaySwitch: true)
+            unitOfTimePicker.isHidden = true
         } else {
             theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
         }
@@ -123,10 +133,12 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         }
         
         hideTimeConversionButtons(displaySwitch: false)
+        unitOfTimePicker.isHidden = false
         
         if theResultString == "nan" || theResultString == "inf" {
             theResult.text = ""
             hideTimeConversionButtons(displaySwitch: true)
+            unitOfTimePicker.isHidden = true
         } else {
             theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
         }
@@ -148,13 +160,111 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         print("Reset function accumulator = ", theCalculationsModel.accumulator)
         
         hideTimeConversionButtons(displaySwitch: true)
+        unitOfTimePicker.isHidden = true
         
         itemPriceTextField.text = String(format: "%.02f", theCalculationsModel.accumulator)
         
         //Make the result label disappear.
         theResult.text = ""
     }
-
+    
+    func unitOfTimeConversion(unitOfTime: String) {
+        switch unitOfTime {
+        case "Seconds":
+            theResultString = String(format: "%.0f", theCalculationsModel.workHoursToSeconds(hoursToWork: theCalculationsModel.accumulator))
+            
+            if theResultString == "1" {
+                theUnitOfTime = "second"
+            } else {
+                theUnitOfTime = "seconds"
+            }
+            
+            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            break
+        case "Minutes":
+            theResultString = String(format: "%.0f", theCalculationsModel.workHoursToMinutes(hoursToWork: theCalculationsModel.accumulator))
+            
+            if theResultString == "1" {
+                theUnitOfTime = "minute"
+            } else {
+                theUnitOfTime = "minutes"
+            }
+            
+            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            break
+        case "Hours":
+            theResultString = calculateHourlyLaborValue()
+            
+            if theResultString == "1" {
+                theUnitOfTime = "hour"
+            } else {
+                theUnitOfTime = "hours"
+            }
+            
+            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            break
+        case "Days":
+            theResultString = String(format: "%.0f", theCalculationsModel.workHoursToDays(hoursToWork: theCalculationsModel.accumulator))
+            
+            if theResultString == "1" {
+                theUnitOfTime = "day"
+            } else {
+                theUnitOfTime = "days"
+            }
+            
+            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            break
+        case "Weeks":
+            theResultString = String(format: "%.0f", theCalculationsModel.workHoursToWeeks(hoursToWork: theCalculationsModel.accumulator))
+            
+            if theResultString == "1" {
+                theUnitOfTime = "week"
+            } else {
+                theUnitOfTime = "weeks"
+            }
+            
+            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            break
+        case "Months":
+            theResultString = String(format: "%.0f", theCalculationsModel.workHoursToMonths(hoursToWork: theCalculationsModel.accumulator))
+            
+            if theResultString == "1" {
+                theUnitOfTime = "month"
+            } else {
+                theUnitOfTime = "months"
+            }
+            
+            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            break
+        case "Years":
+            theResultString = String(format: "%.0f", theCalculationsModel.workHoursToYears(hoursToWork: theCalculationsModel.accumulator))
+            
+            if theResultString == "1" {
+                theUnitOfTime = "year"
+            } else {
+                theUnitOfTime = "years"
+            }
+            
+            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            break
+        default:
+            //By default run the "Hours" case
+            theResultString = calculateHourlyLaborValue()
+            
+            if theResultString == "1" {
+                theUnitOfTime = "hour"
+            } else {
+                theUnitOfTime = "hours"
+            }
+            
+            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        unitOfTimeConversion(unitOfTime: unitOfTimePickerViewData[row])
+    }
+    
     @IBAction func displayOriginalNumber(_ sender: Any) {
         theResultString = calculateHourlyLaborValue()
         
@@ -164,7 +274,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             theUnitOfTime = "hours"
         }
         
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
     }
     
     @IBAction func hoursToSeconds(_ sender: Any) {
@@ -176,7 +286,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             theUnitOfTime = "seconds"
         }
         
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
     }
     
     @IBAction func hoursToMinutes(_ sender: Any) {
@@ -188,7 +298,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             theUnitOfTime = "minutes"
         }
         
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
     }
     
     @IBAction func hoursToDays(_ sender: Any) {
@@ -200,7 +310,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             theUnitOfTime = "days"
         }
         
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
     }
     
     @IBAction func hoursToWeeks(_ sender: Any) {
@@ -212,7 +322,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             theUnitOfTime = "weeks"
         }
         
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
     }
     
     @IBAction func hoursToMonths(_ sender: Any) {
@@ -224,7 +334,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             theUnitOfTime = "months"
         }
         
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
     }
     
     @IBAction func hoursToYears(_ sender: Any) {
@@ -236,7 +346,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             theUnitOfTime = "years"
         }
         
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this"
+        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
     }
     
     func hideTimeConversionButtons(displaySwitch: Bool) {
@@ -300,8 +410,6 @@ extension UIViewController {
     }
 }
 
-//User Defaults code based off of https://www.youtube.com/watch?v=XzWBT6lIB3A and https://programmingwithswift.com/how-to-use-userdefaults-suites-with-swift/
-
 //Source (first answer) -- https://stackoverflow.com/questions/38133853/how-to-add-a-return-key-on-a-decimal-pad-in-swift
 extension UITextField {
     func addDoneCancelToolbar(onDone: (target: Any, action: Selector)? = nil, onCancel: (target: Any, action: Selector)? = nil) {
@@ -332,3 +440,21 @@ extension UITextField {
          }
     */
 }
+
+extension MainViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return unitOfTimePickerViewData.count
+    }
+}
+
+extension MainViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return unitOfTimePickerViewData[row]
+    }
+}
+
+//User Defaults code based off of https://www.youtube.com/watch?v=XzWBT6lIB3A and https://programmingwithswift.com/how-to-use-userdefaults-suites-with-swift/
