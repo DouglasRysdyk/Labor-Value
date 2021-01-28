@@ -14,40 +14,48 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
 \cf0 \ul Commit:\ulnone   \
 \
-\'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
+\'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
 \ul TODO:\ulnone   \
-- Make the result text more human readable.  \
-  - EG. "Less than a week" and "Less than 4 minutes."  "Less than a second." \
-  - I suspect this will take a lot of work.  \
-\
-- Look for code snippets to save.  \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
-\cf0 \
-- Read about designing human interfaces and how to get your app accepted onto the app store -- https://developer.apple.com/design/ \
-- Auto-layout work.  Make the Main view look nice.  \
-  - Draw what you want it to look like.  \
-  - Modify everything to look like your design.  \
-\
-- Constrain everything.  \
-- Try different phone sizes.  \
-\
-- Fix any remaining errors.  \
-- Fix this error "Can't find keyplane that supports type 8 for keyboard iPhone-PortraitTruffle-DecimalPad; using 25942_PortraitTruffle_iPhone-Simple-Pad_Default" \
-  - https://developer.apple.com/forums/thread/126616 \
-\
-- Look into adding ads.  \
-\
-- Look into a user complaint form thing.  \
-\
-- Show to Dad and go over release idea.  \
+Prepare to show Dad:  \
+- Redo the MainView to be more reminiscent of a dollar bill's color scheme.  \
+- Replace the units of time with a wheel view.  \
+  - This shouldn't be too hard and I think the functionality would be the same.  Find a tutorial and commit first though.  \
+- Get rid of the placeholder buttons.  \
+  - Simply make them invisible for now.  \
+- Questions: \
+  - Should I have a Reset button at all?  \
+  - If I do then should it look different?  I was thinking a circular arrow on the right side of the label.  \
   - Should the result text start as a default thing like instructions?  \
   - I think I should make a WatchOS app plus some updates, then release a second update.  \
   - Then I think I should make the whole solution as seamless as I can by beginning with SiriKit stuff.  \
     - This order because once I have data moving between the phone and watch apps I'll have a better idea of overall data flow.  \
+  - I tried this very green style to theme it after money, but I'm not completely sold on it.  I did this because I felt black and blue on white looked too default and boring.  It's true I may not even need to worry about what it looks like in the future but even still I think the base app should look passable at least.  \
 \
-Updates: \cb2 \
-- Come up with a plan for keeping internationalization as an update for later.  \
-  - Will likely include a more thorough separation of display logic and calculation logic.  \cb1 \
+Research user feedback mechanisms [4]: \
+- Can I implement them myself?  \
+- What should I add?  \
+- What do others recommend?  \
+- Ideas: \
+  - Review prompt.  \
+  - User complaint form thing.  \
+  - Other user friendly features.  \
+\
+Auto-layout work.  \
+- Go over modifications I need to make.  \
+- Constrain everything so it looks good on multiple devices.  \
+\
+More Polish: \
+- Make the actual text get smaller when the user types in large numbers.  \
+- Move and change the reset button.  \
+  - Move to the right of the textfield and make it a symbol.  \
+  - Do I even really need a reset button?  \
+- Read about designing human interfaces and how to get your app accepted onto the app store -- https://developer.apple.com/design/ \
+  - Read like one chapter a day.  \
+- Fix any remaining errors.  \
+- Fix this error "Can't find keyplane that supports type 8 for keyboard iPhone-PortraitTruffle-DecimalPad; using 25942_PortraitTruffle_iPhone-Simple-Pad_Default" \
+  - https://developer.apple.com/forums/thread/126616 \
+\
+Updates: \
 - Design and add the "Figure out your hourly labor value" thing as an update.  \
 - Design the multi-add system.  \
   - The table view is just there to show your previous entries and allow you to edit them easily.  \
@@ -55,9 +63,17 @@ Updates: \cb2 \
   - SiriKit Tutorial -- https://www.youtube.com/watch?v=_PGgTm1TWR8 \
 - Add WatchOS support.  \
   - WatchOS Tutorial -- https://www.youtube.com/watch?v=Y8A_Wkcx83Q\
+- Consider hiding the user income stuff.  \
+  - Can ask the user initially and then hide after subsequent launches.  \
+  - User can change this on their profile screen.  \cb2 \
+- Come up with a plan for keeping internationalization as an update for later.  \
+  - Will likely include a more thorough separation of display logic and calculation logic.  \cb1 \
 - Consider reaching a wider audience.  Internationalization, blind, deaf, color blind, stuff.  \
   - https://developer.apple.com/localization/ \
   - https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/supporting_voiceover_in_your_app \
+- Make the result text more human readable.  \
+  - EG. "Less than a week" and "Less than 4 minutes."  "Less than a second." \
+  - I suspect this will take a lot of work.  \
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\
 Errors (01/26/2021): \
 \pard\tx593\pardeftab593\pardirnatural\partightenfactor0
@@ -265,8 +281,7 @@ The methods in the UIConstraintBasedLayoutDebugging category on UIView listed in
 \f1\b0\fs32 \cf0 \cb1 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
 \cf0 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
-\cf0 \ul Notes:\ulnone  \
+\ul Notes:\ulnone  \
 - When the user starts the program for the first time there will not be anything in user defaults.  I don't know if this is really a problem.  \
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\partightenfactor0

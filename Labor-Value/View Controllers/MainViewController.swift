@@ -323,4 +323,12 @@ extension UITextField {
     // Default actions:
     @objc func doneButtonTapped() { self.resignFirstResponder() }
     @objc func cancelButtonTapped() { self.resignFirstResponder() }
+    
+    /*
+     @IBOutlet weak var exampleTextField: UITextField! {
+         didSet {
+             exampleTextField?.doneButtonTapped() //Default implementation
+             exampleTextField?.addDoneCancelToolbar(onCancel: (target: self, action: #selector(cancelButtonTappeditemPriceTextField))) //Modified implementation
+         }
+    */
 }
