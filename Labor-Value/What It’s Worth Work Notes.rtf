@@ -16,20 +16,21 @@
 \
 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
 \ul TODO:\ulnone   \
-Prepare to show Dad:  \
-- Redo the MainView to be more reminiscent of a dollar bill's color scheme.  \
-- Replace the units of time with a wheel view.  \
-  - This shouldn't be too hard and I think the functionality would be the same.  Find a tutorial and commit first though.  \
-- Get rid of the placeholder buttons.  \
-  - Simply make them invisible for now.  \
-- Questions: \
-  - Should I have a Reset button at all?  \
-  - If I do then should it look different?  I was thinking a circular arrow on the right side of the label.  \
-  - Should the result text start as a default thing like instructions?  \
-  - I think I should make a WatchOS app plus some updates, then release a second update.  \
-  - Then I think I should make the whole solution as seamless as I can by beginning with SiriKit stuff.  \
-    - This order because once I have data moving between the phone and watch apps I'll have a better idea of overall data flow.  \
-  - I tried this very green style to theme it after money, but I'm not completely sold on it.  I did this because I felt black and blue on white looked too default and boring.  It's true I may not even need to worry about what it looks like in the future but even still I think the base app should look passable at least.  \
+- Notes: \
+  - "It will take you X to pay for this."\
+  - Get rid of units of time UI.  \
+  - Work on human readability first.  \
+    - "It'll take you an hour and 17 minutes..."  \
+    - "It'll take you an hour and a half..." \
+    - Hour + minutes.  \
+  - Want the specific answer, get rid of extraneous answers (anything with a 0).  \
+  - Get rid of "$" placeholder text.  \
+  - Hitting cancel should reset the item price textfield.  \
+  - "I never want to spend more than one hour of work?" Next iteration?  \
+    - Add meaning to the answers.  \
+    - Part of a budgeting app thing.  \
+  - Get rid of the navigation view controller thing.  \
+    - Can add a button somewhere.  \
 \
 Research user feedback mechanisms [4]: \
 - Can I implement them myself?  \
@@ -41,7 +42,8 @@ Research user feedback mechanisms [4]: \
   - Other user friendly features.  \
 \
 Auto-layout work.  \
-- Go over modifications I need to make.  \
+- Look into decent color theming.  \
+  - Idea -- https://www.schemecolor.com/dollar-bill-color-scheme.php \
 - Constrain everything so it looks good on multiple devices.  \
 \
 More Polish: \

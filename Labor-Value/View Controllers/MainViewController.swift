@@ -67,7 +67,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         
         theResult.text = theResultString
         
-        hideTimeConversionButtons(displaySwitch: true)
         unitOfTimePicker.isHidden = true
         
         hideKeyboardWhenTappedAround()
@@ -107,12 +106,10 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             theUnitOfTime = "hours"
         }
         
-        hideTimeConversionButtons(displaySwitch: false)
         unitOfTimePicker.isHidden = false
     
         if theResultString == "nan" || theResultString == "inf" {
             theResult.text = ""
-            hideTimeConversionButtons(displaySwitch: true)
             unitOfTimePicker.isHidden = true
         } else {
             theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
@@ -132,12 +129,10 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             theUnitOfTime = "hours"
         }
         
-        hideTimeConversionButtons(displaySwitch: false)
         unitOfTimePicker.isHidden = false
         
         if theResultString == "nan" || theResultString == "inf" {
             theResult.text = ""
-            hideTimeConversionButtons(displaySwitch: true)
             unitOfTimePicker.isHidden = true
         } else {
             theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
@@ -159,7 +154,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         theCalculationsModel.accumulator = 0.0
         print("Reset function accumulator = ", theCalculationsModel.accumulator)
         
-        hideTimeConversionButtons(displaySwitch: true)
         unitOfTimePicker.isHidden = true
         
         itemPriceTextField.text = String(format: "%.02f", theCalculationsModel.accumulator)
@@ -265,100 +259,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         unitOfTimeConversion(unitOfTime: unitOfTimePickerViewData[row])
     }
     
-    @IBAction func displayOriginalNumber(_ sender: Any) {
-        theResultString = calculateHourlyLaborValue()
-        
-        if theResultString == "1" {
-            theUnitOfTime = "hour"
-        } else {
-            theUnitOfTime = "hours"
-        }
-        
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
-    }
-    
-    @IBAction func hoursToSeconds(_ sender: Any) {
-        theResultString = String(format: "%.0f", theCalculationsModel.workHoursToSeconds(hoursToWork: theCalculationsModel.accumulator))
-        
-        if theResultString == "1" {
-            theUnitOfTime = "second"
-        } else {
-            theUnitOfTime = "seconds"
-        }
-        
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
-    }
-    
-    @IBAction func hoursToMinutes(_ sender: Any) {
-        theResultString = String(format: "%.0f", theCalculationsModel.workHoursToMinutes(hoursToWork: theCalculationsModel.accumulator))
-        
-        if theResultString == "1" {
-            theUnitOfTime = "minute"
-        } else {
-            theUnitOfTime = "minutes"
-        }
-        
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
-    }
-    
-    @IBAction func hoursToDays(_ sender: Any) {
-        theResultString = String(format: "%.0f", theCalculationsModel.workHoursToDays(hoursToWork: theCalculationsModel.accumulator))
-        
-        if theResultString == "1" {
-            theUnitOfTime = "day"
-        } else {
-            theUnitOfTime = "days"
-        }
-        
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
-    }
-    
-    @IBAction func hoursToWeeks(_ sender: Any) {
-        theResultString = String(format: "%.0f", theCalculationsModel.workHoursToWeeks(hoursToWork: theCalculationsModel.accumulator))
-        
-        if theResultString == "1" {
-            theUnitOfTime = "week"
-        } else {
-            theUnitOfTime = "weeks"
-        }
-        
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
-    }
-    
-    @IBAction func hoursToMonths(_ sender: Any) {
-        theResultString = String(format: "%.0f", theCalculationsModel.workHoursToMonths(hoursToWork: theCalculationsModel.accumulator))
-        
-        if theResultString == "1" {
-            theUnitOfTime = "month"
-        } else {
-            theUnitOfTime = "months"
-        }
-        
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
-    }
-    
-    @IBAction func hoursToYears(_ sender: Any) {
-        theResultString = String(format: "%.0f", theCalculationsModel.workHoursToYears(hoursToWork: theCalculationsModel.accumulator))
-        
-        if theResultString == "1" {
-            theUnitOfTime = "year"
-        } else {
-            theUnitOfTime = "years"
-        }
-        
-        theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
-    }
-    
-    func hideTimeConversionButtons(displaySwitch: Bool) {
-        hoursToSecondsButton.isHidden = displaySwitch
-        hoursToMinutesButton.isHidden = displaySwitch
-        displayOriginalNumberButton.isHidden = displaySwitch
-        hoursToDaysButton.isHidden = displaySwitch
-        hoursToWeeksButton.isHidden = displaySwitch
-        hoursToMonthsButton.isHidden = displaySwitch
-        hoursToYearsButton.isHidden = displaySwitch
-    }
-    
     @objc func cancelButtonTappedIncomeTextField() {
         incomeTextField.text = originalIncomeText
         
@@ -431,14 +331,6 @@ extension UITextField {
     // Default actions:
     @objc func doneButtonTapped() { self.resignFirstResponder() }
     @objc func cancelButtonTapped() { self.resignFirstResponder() }
-    
-    /*
-     @IBOutlet weak var exampleTextField: UITextField! {
-         didSet {
-             exampleTextField?.doneButtonTapped() //Default implementation
-             exampleTextField?.addDoneCancelToolbar(onCancel: (target: self, action: #selector(cancelButtonTappeditemPriceTextField))) //Modified implementation
-         }
-    */
 }
 
 extension MainViewController: UIPickerViewDataSource {
