@@ -16,21 +16,35 @@
 \
 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
 \ul TODO:\ulnone   \
-- Notes: \
-  - "It will take you X to pay for this."\
-  - Get rid of units of time UI.  \
-  - Work on human readability first.  \
-    - "It'll take you an hour and 17 minutes..."  \
-    - "It'll take you an hour and a half..." \
-    - Hour + minutes.  \
-  - Want the specific answer, get rid of extraneous answers (anything with a 0).  \
-  - Get rid of "$" placeholder text.  \
+Hook up to GitHub for save redundancy.  \
+\
+Fix the units of time result label: \
+- Goal is for it to say something like "It will take you 10 minutes and 33 seconds to pay for this." \
+  - "It will take you 4 days and 6 hours to pay for this."  \
+  - "It will take you an hour and a half to pay for this."  \
+  - "It will take you half an hour to pay for this."  \
+  - "It will take you 3 hours and 43 minutes to pay for this."  \
+  - "It will take you one year to pay for this."  \
+- Use a switch statement.  \
+  - Feed it the calculation result.  \
+  - Use a series of cases to figure out what the result label should say.  \
+  - Reuse whatever UIPickerView code you want.  \
+- Delete the UIPickerView and associated delegates, data, outlets, etc.  \
+- Other stuff: \
+  - Try the dollar bill color scheme thing again but look up examples first.  \
+  - Get rid of "$" placeholder text in the itemPriceTextField.  \
   - Hitting cancel should reset the item price textfield.  \
-  - "I never want to spend more than one hour of work?" Next iteration?  \
-    - Add meaning to the answers.  \
-    - Part of a budgeting app thing.  \
-  - Get rid of the navigation view controller thing.  \
-    - Can add a button somewhere.  \
+  - Get rid of the navigation view controller thing for now.  \
+    - Can add a button somewhere for donations or whatever.  \
+  - What happens when I type in ridiculously large numbers?  \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
+\cf0 \
+More Polish: \
+- Read about designing human interfaces and how to get your app accepted onto the app store -- https://developer.apple.com/design/ \
+  - Read like one chapter a day.  \
+- Fix any remaining errors.  \
+  - Fix this error "Can't find keyplane that supports type 8 for keyboard iPhone-PortraitTruffle-DecimalPad; using 25942_PortraitTruffle_iPhone-Simple-Pad_Default" \
+    - https://developer.apple.com/forums/thread/126616 \
 \
 Research user feedback mechanisms [4]: \
 - Can I implement them myself?  \
@@ -41,42 +55,46 @@ Research user feedback mechanisms [4]: \
   - User complaint form thing.  \
   - Other user friendly features.  \
 \
+Consider revenue: \
+- Add ads?  \
+- Make it paid for? \
+- Add a charity option?  \
+\
 Auto-layout work.  \
 - Look into decent color theming.  \
   - Idea -- https://www.schemecolor.com/dollar-bill-color-scheme.php \
 - Constrain everything so it looks good on multiple devices.  \
 \
-More Polish: \
-- Make the actual text get smaller when the user types in large numbers.  \
-- Move and change the reset button.  \
-  - Move to the right of the textfield and make it a symbol.  \
-  - Do I even really need a reset button?  \
-- Read about designing human interfaces and how to get your app accepted onto the app store -- https://developer.apple.com/design/ \
-  - Read like one chapter a day.  \
-- Fix any remaining errors.  \
-- Fix this error "Can't find keyplane that supports type 8 for keyboard iPhone-PortraitTruffle-DecimalPad; using 25942_PortraitTruffle_iPhone-Simple-Pad_Default" \
-  - https://developer.apple.com/forums/thread/126616 \
-\
-Updates: \
-- Design and add the "Figure out your hourly labor value" thing as an update.  \
-- Design the multi-add system.  \
-  - The table view is just there to show your previous entries and allow you to edit them easily.  \
+Update Ideas:\
+- Create time/money management budget option.  \
+  - Move the user income stuff to a first time set up screen.  \
+  - Design and add the "Figure out your hourly labor value" thing as an update.  \
+  - Dad Notes Transfer: \
+    - "I never want to spend more than one hour of work?" Next iteration?  \
+      - Add meaning to the answers.  \
+      - Part of a budgeting app thing.  \
+- Add a more dynamic search bar.  \
+  - Someone can type in a product instead of just a cost and the app will find out how much that may be. \
+    - Dad's beer example.  \
+    - This builds the foundation for simply asking Siri.  \
+    - At this moment I suspect we'll need to use Siri.  \
+- Add a way for users to add their own products to a local list we can download.  \
 - Add SiriKit.  \
   - SiriKit Tutorial -- https://www.youtube.com/watch?v=_PGgTm1TWR8 \
 - Add WatchOS support.  \
   - WatchOS Tutorial -- https://www.youtube.com/watch?v=Y8A_Wkcx83Q\
-- Consider hiding the user income stuff.  \
-  - Can ask the user initially and then hide after subsequent launches.  \
-  - User can change this on their profile screen.  \cb2 \
-- Come up with a plan for keeping internationalization as an update for later.  \
+- Design the multi-add system.  \
+  - The table view is just there to show your previous entries and allow you to edit them easily.  \
+- User can just take a picture of an item or a price and get answer that way?\
+  - May be useful with multi-add system.  Like you make a shopping list?  \
+  - Honestly seems useless but worth thinking about a little more.  \
+  - At the very list taking a picture of a price means you don't need to type it in so that's good.  \
+- Consider reaching a wider audience.  Internationalization, blind, deaf, color blind, stuff.  \cb2 \
   - Will likely include a more thorough separation of display logic and calculation logic.  \cb1 \
-- Consider reaching a wider audience.  Internationalization, blind, deaf, color blind, stuff.  \
   - https://developer.apple.com/localization/ \
   - https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/supporting_voiceover_in_your_app \
-- Make the result text more human readable.  \
-  - EG. "Less than a week" and "Less than 4 minutes."  "Less than a second." \
-  - I suspect this will take a lot of work.  \
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\
+  - Is there someone who is an expert at this that I can ask?  \
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------\
 Errors (01/26/2021): \
 \pard\tx593\pardeftab593\pardirnatural\partightenfactor0
 
