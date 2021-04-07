@@ -271,14 +271,18 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         itemPriceTextField.resignFirstResponder()
     }
     
+    //MARK: Need to convert from this result to
+     //Alternatively I can use maybe a For Loop to figure out which answers are too low.
+     //Will prolly need to change the name of this and anything else that references the "hourly" labor value specifically.  
     func calculateHourlyLaborValue() -> String {
         //Convert the textfield text to doubles.
         let theItemPrice = Double(itemPriceTextField.text ?? "0") ?? 0.0
         let theIncome = Double(incomeTextField.text ?? "0") ?? 0.0
     
+        //MARK: Change in theCalculationModel.
         //Convert the result to a String for theResult label.
         //TODO: Make anything less than 0 human legible (like say "it's less than half an hour" or something).
-        theResultString = String(format: "%.0f", theCalculationsModel.hoursToWork(itemPrice: theItemPrice, userIncome: theIncome))
+        theResultString = String(format: "%.0f", theCalculationsModel.calculateLaborValue(itemPrice: theItemPrice, userIncome: theIncome))
     
         return theResultString
     }

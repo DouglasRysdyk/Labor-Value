@@ -11,13 +11,39 @@ class Calculations {
     //Adds all of the user's entries together into one pile.
     var accumulator = 0.0
     
-    func hoursToWork(itemPrice: Double, userIncome: Double) -> Double {
-        //How many hours of work it takes to pay for an item.
+    //MARK: WORKING ON
+    func calculateLaborValue(itemPrice: Double, userIncome: Double) -> Double {
         accumulator = itemPrice / userIncome
-        
+        /*
+        //For every calculation do one calculation and save that number IF it is smaller than the last, but not 0.
+        //Need a finalValue variable
+        //Need a holdOver variable
+        for _/*want a name for this*/ in 0...6 {
+            //Hourly wage to labor seconds
+            workHoursToSeconds(hoursToWork: accumulator)
+            
+            //Hourly wage to labor minutes
+            workHoursToMinutes(hoursToWork: accumulator)
+            
+            //Hourly wage to labor hours
+            
+            //Hourly wage to labor days
+            workHoursToDays(hoursToWork: accumulator)
+            
+            //Hourly wage to labor weeks
+            workHoursToWeeks(hoursToWork: accumulator)
+            
+            //Hourly wage to labor months
+            workHoursToMonths(hoursToWork: accumulator)
+            
+            //Hourly wage to labor years
+            workHoursToYears(hoursToWork: accumulator)
+        }
+        */
         //Commented out because I know this works and this is getting distracting.  Keeping in case I need to bug fix.  
-        //print("TEST: totalItems = ", accumulator)
+//        print("TEST: totalItems = ", accumulator)
         
+        //Returns the final value
         return accumulator
     }
     

@@ -1,4 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2577
+{\rtf1\ansi\ansicpg1252\cocoartf2578
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Bold;
 \f3\fswiss\fcharset0 Helvetica-BoldOblique;}
 {\colortbl;\red255\green255\blue255;\red255\green255\blue255;\red255\green255\blue255;\red31\green31\blue36;
@@ -14,11 +14,23 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
 \cf0 \ul Commit:\ulnone   \
 \
-\'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
-\ul TODO:\ulnone   \
-Hook up to GitHub for save redundancy.  \
 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
+\cf0 - Deleted the UIPickerView and its associated code.  \
+\'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
+\cf0 \ul TODO:\ulnone   \
 Fix the units of time result label: \
+- Add a function that loops through the conversions from hours till it finds the smallest option.  \
+- I'm keeping the hour conversion because by default people's labor value will be displayed as hourly.  I think keeping it this way will save me a step.  \
+- We're looking for the smallest number that is not zero.  \
+  - So if I'm paid $15.50 and I want to buy a $1,000 item then it will take 3 days at least.  Everything else is either zero or a much larger number.  \
+- Loop through and do each calculation.  Compare each answer to the last.  Save the smallest answer to a variable.  \
+\
+- 
+\f0\b If I'm understanding my code right I can just call the unitOfTimeConversion function right after the calculation is done
+\f1\b0 .  \
+  - This doesn't solve the logic problem which is how do I figure out the lowest unit of time.  \
 - Goal is for it to say something like "It will take you 10 minutes and 33 seconds to pay for this." \
   - "It will take you 4 days and 6 hours to pay for this."  \
   - "It will take you an hour and a half to pay for this."  \
@@ -29,16 +41,15 @@ Fix the units of time result label: \
   - Feed it the calculation result.  \
   - Use a series of cases to figure out what the result label should say.  \
   - Reuse whatever UIPickerView code you want.  \
-- Delete the UIPickerView and associated delegates, data, outlets, etc.  \
 - Other stuff: \
-  - Try the dollar bill color scheme thing again but look up examples first.  \
+  - Figure out a decent visual design.  \
+    - Probably keep white as the basis.   \
   - Get rid of "$" placeholder text in the itemPriceTextField.  \
   - Hitting cancel should reset the item price textfield.  \
   - Get rid of the navigation view controller thing for now.  \
     - Can add a button somewhere for donations or whatever.  \
   - What happens when I type in ridiculously large numbers?  \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
-\cf0 \
+\
 More Polish: \
 - Read about designing human interfaces and how to get your app accepted onto the app store -- https://developer.apple.com/design/ \
   - Read like one chapter a day.  \
@@ -94,6 +105,8 @@ Update Ideas:\
   - https://developer.apple.com/localization/ \
   - https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/supporting_voiceover_in_your_app \
   - Is there someone who is an expert at this that I can ask?  \
+\
+Submit an app for review \'97 https://developer.apple.com/ios/submit/\
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------\
 Errors (01/26/2021): \
 \pard\tx593\pardeftab593\pardirnatural\partightenfactor0
