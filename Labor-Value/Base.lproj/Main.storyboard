@@ -99,11 +99,6 @@
                                     <color key="titleColor" red="0.0" green="0.0096537812079999993" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                             </button>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hxw-Y8-sWj">
-                                <rect key="frame" x="0.0" y="674" width="414" height="188"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AmU-3L-Qbf">
                                 <rect key="frame" x="258" y="497" width="36" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -125,7 +120,6 @@
                         <outlet property="incomeTextField" destination="0zv-9c-0I2" id="rdJ-7f-YAb"/>
                         <outlet property="itemPriceTextField" destination="TfR-Vf-xgO" id="9HL-so-RYX"/>
                         <outlet property="theResult" destination="IIW-bv-DXk" id="QQz-4r-yeq"/>
-                        <outlet property="unitOfTimePicker" destination="Hxw-Y8-sWj" id="ZGZ-Jp-mGu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

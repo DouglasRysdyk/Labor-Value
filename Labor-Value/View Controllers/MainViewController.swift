@@ -29,16 +29,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var theResult: UILabel!
     
-    @IBOutlet weak var unitOfTimePicker: UIPickerView!
-    
-    @IBOutlet weak var hoursToSecondsButton: UIButton!
-    @IBOutlet weak var hoursToMinutesButton: UIButton!
-    @IBOutlet weak var displayOriginalNumberButton: UIButton!
-    @IBOutlet weak var hoursToDaysButton: UIButton!
-    @IBOutlet weak var hoursToWeeksButton: UIButton!
-    @IBOutlet weak var hoursToMonthsButton: UIButton!
-    @IBOutlet weak var hoursToYearsButton: UIButton!
-    
     //Save the incomeTextField.text and itemPriceTextField.text before the user saves or cancels their input.
     var originalIncomeText = ""
     var originalItemPriceText = ""
@@ -53,9 +43,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         self.incomeTextField.delegate = self
         self.itemPriceTextField.delegate = self
         
-        unitOfTimePicker.dataSource = self
-        unitOfTimePicker.delegate = self
-        
         //On load, set the incomeTextField.text to whatever value is saved in User Defaults.
         if let value = UserDefaultsManager.shared.savedUserIncomeSuiteDefault?.value(forKey: "userIncome") as? String {
             incomeTextField.text = value
@@ -66,8 +53,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         }
         
         theResult.text = theResultString
-        
-        unitOfTimePicker.isHidden = true
         
         hideKeyboardWhenTappedAround()
     }
@@ -105,12 +90,9 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         } else {
             theUnitOfTime = "hours"
         }
-        
-        unitOfTimePicker.isHidden = false
     
         if theResultString == "nan" || theResultString == "inf" {
             theResult.text = ""
-            unitOfTimePicker.isHidden = true
         } else {
             theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
         }
@@ -129,11 +111,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             theUnitOfTime = "hours"
         }
         
-        unitOfTimePicker.isHidden = false
-        
         if theResultString == "nan" || theResultString == "inf" {
             theResult.text = ""
-            unitOfTimePicker.isHidden = true
         } else {
             theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
         }
@@ -153,8 +132,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBAction func reset(_ sender: Any) {
         theCalculationsModel.accumulator = 0.0
         print("Reset function accumulator = ", theCalculationsModel.accumulator)
-        
-        unitOfTimePicker.isHidden = true
         
         itemPriceTextField.text = String(format: "%.02f", theCalculationsModel.accumulator)
         
