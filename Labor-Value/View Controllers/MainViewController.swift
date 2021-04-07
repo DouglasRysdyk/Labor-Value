@@ -33,7 +33,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     var originalIncomeText = ""
     var originalItemPriceText = ""
 
-    var theResultString = ""
+    var theCalculationString = ""
     var theUnitOfTime = ""
     
     //Load the view.  
@@ -52,7 +52,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             print("User defaults is empty.")
         }
         
-        theResult.text = theResultString
+        theResult.text = theCalculationString
         
         hideKeyboardWhenTappedAround()
     }
@@ -80,21 +80,19 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         UserDefaultsManager.shared.savedUserIncomeSuiteDefault?.setValue(incomeTextField.text, forKey: "userIncome")
     }
     
+    //MARK: WORKING ON
     //Do the calculation if the user changes their income.
     //Editing Changed IBAction
     @IBAction func incomeTextFieldEditingChanged(_ sender: Any) {
-        theResultString = calculateHourlyLaborValue()
+        theCalculationString = calculateHourlyLaborValue()
         
-        if theResultString == "1" {
-            theUnitOfTime = "hour"
-        } else {
-            theUnitOfTime = "hours"
-        }
+        //MARK: This is defaulted to hours I need to convert to whatever the proper unit of time is.
+        let theUnitOfTime = theCalculationString == "1" ? "hour" : "hours"
     
-        if theResultString == "nan" || theResultString == "inf" {
+        if theCalculationString == "nan" || theCalculationString == "inf" {
             theResult.text = ""
         } else {
-            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
         }
     }
     
@@ -103,18 +101,15 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBAction func itemPriceTextFieldEditingChanged(_ sender: UITextField) {
         //Editing Changed Source -- https://youtu.be/XUH1O1BTUvo?t=100 till 6:26
         
-        theResultString = calculateHourlyLaborValue()
+        //MARK: WORKING ON
+        theCalculationString = calculateHourlyLaborValue()
         
-        if theResultString == "1" {
-            theUnitOfTime = "hour"
-        } else {
-            theUnitOfTime = "hours"
-        }
+        let theUnitOfTime = theCalculationString == "1" ? "hour" : "hours"
         
-        if theResultString == "nan" || theResultString == "inf" {
+        if theCalculationString == "nan" || theCalculationString == "inf" {
             theResult.text = ""
         } else {
-            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
         }
     }
     
@@ -139,101 +134,66 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         theResult.text = ""
     }
     
+    //MARK: WORKING ON
     func unitOfTimeConversion(unitOfTime: String) {
         switch unitOfTime {
         case "Seconds":
-            theResultString = String(format: "%.0f", theCalculationsModel.workHoursToSeconds(hoursToWork: theCalculationsModel.accumulator))
+            theCalculationString = String(format: "%.0f", theCalculationsModel.workHoursToSeconds(hoursToWork: theCalculationsModel.accumulator))
             
-            if theResultString == "1" {
-                theUnitOfTime = "second"
-            } else {
-                theUnitOfTime = "seconds"
-            }
+            let theUnitOfTime = theCalculationString == "1" ? "second" : "seconds"
             
-            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
             break
         case "Minutes":
-            theResultString = String(format: "%.0f", theCalculationsModel.workHoursToMinutes(hoursToWork: theCalculationsModel.accumulator))
+            theCalculationString = String(format: "%.0f", theCalculationsModel.workHoursToMinutes(hoursToWork: theCalculationsModel.accumulator))
             
-            if theResultString == "1" {
-                theUnitOfTime = "minute"
-            } else {
-                theUnitOfTime = "minutes"
-            }
+            let theUnitOfTime = theCalculationString == "1" ? "minute" : "minutes"
             
-            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
             break
         case "Hours":
-            theResultString = calculateHourlyLaborValue()
+            theCalculationString = calculateHourlyLaborValue()
             
-            if theResultString == "1" {
-                theUnitOfTime = "hour"
-            } else {
-                theUnitOfTime = "hours"
-            }
+            let theUnitOfTime = theCalculationString == "1" ? "hour" : "hours"
             
-            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
             break
         case "Days":
-            theResultString = String(format: "%.0f", theCalculationsModel.workHoursToDays(hoursToWork: theCalculationsModel.accumulator))
+            theCalculationString = String(format: "%.0f", theCalculationsModel.workHoursToDays(hoursToWork: theCalculationsModel.accumulator))
             
-            if theResultString == "1" {
-                theUnitOfTime = "day"
-            } else {
-                theUnitOfTime = "days"
-            }
+            let theUnitOfTime = theCalculationString == "1" ? "day" : "days"
             
-            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
             break
         case "Weeks":
-            theResultString = String(format: "%.0f", theCalculationsModel.workHoursToWeeks(hoursToWork: theCalculationsModel.accumulator))
+            theCalculationString = String(format: "%.0f", theCalculationsModel.workHoursToWeeks(hoursToWork: theCalculationsModel.accumulator))
             
-            if theResultString == "1" {
-                theUnitOfTime = "week"
-            } else {
-                theUnitOfTime = "weeks"
-            }
+            let theUnitOfTime = theCalculationString == "1" ? "week" : "weeks"
             
-            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
             break
         case "Months":
-            theResultString = String(format: "%.0f", theCalculationsModel.workHoursToMonths(hoursToWork: theCalculationsModel.accumulator))
+            theCalculationString = String(format: "%.0f", theCalculationsModel.workHoursToMonths(hoursToWork: theCalculationsModel.accumulator))
             
-            if theResultString == "1" {
-                theUnitOfTime = "month"
-            } else {
-                theUnitOfTime = "months"
-            }
+            let theUnitOfTime = theCalculationString == "1" ? "month" : "months"
             
-            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
             break
         case "Years":
-            theResultString = String(format: "%.0f", theCalculationsModel.workHoursToYears(hoursToWork: theCalculationsModel.accumulator))
+            theCalculationString = String(format: "%.0f", theCalculationsModel.workHoursToYears(hoursToWork: theCalculationsModel.accumulator))
             
-            if theResultString == "1" {
-                theUnitOfTime = "year"
-            } else {
-                theUnitOfTime = "years"
-            }
+            let theUnitOfTime = theCalculationString == "1" ? "year" : "years"
             
-            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
             break
         default:
             //By default run the "Hours" case
-            theResultString = calculateHourlyLaborValue()
+            theCalculationString = calculateHourlyLaborValue()
             
-            if theResultString == "1" {
-                theUnitOfTime = "hour"
-            } else {
-                theUnitOfTime = "hours"
-            }
+            let theUnitOfTime = theCalculationString == "1" ? "hour" : "hours"
             
-            theResult.text = "It would take \(theResultString) \(theUnitOfTime) to pay for this."
+            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
         }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        unitOfTimeConversion(unitOfTime: unitOfTimePickerViewData[row])
     }
     
     @objc func cancelButtonTappedIncomeTextField() {
@@ -259,9 +219,9 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         //MARK: Change in theCalculationModel.
         //Convert the result to a String for theResult label.
         //TODO: Make anything less than 0 human legible (like say "it's less than half an hour" or something).
-        theResultString = String(format: "%.0f", theCalculationsModel.calculateLaborValue(itemPrice: theItemPrice, userIncome: theIncome))
+        theCalculationString = String(format: "%.0f", theCalculationsModel.calculateLaborValue(itemPrice: theItemPrice, userIncome: theIncome))
     
-        return theResultString
+        return theCalculationString
     }
     
     //Source (2nd Answer) -- https://stackoverflow.com/questions/27883171/how-do-you-limit-only-1-decimal-entry-in-a-uitextfield-in-swift-for-ios8/27884715
@@ -312,22 +272,6 @@ extension UITextField {
     // Default actions:
     @objc func doneButtonTapped() { self.resignFirstResponder() }
     @objc func cancelButtonTapped() { self.resignFirstResponder() }
-}
-
-extension MainViewController: UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return unitOfTimePickerViewData.count
-    }
-}
-
-extension MainViewController: UIPickerViewDelegate {
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return unitOfTimePickerViewData[row]
-    }
 }
 
 //User Defaults code based off of https://www.youtube.com/watch?v=XzWBT6lIB3A and https://programmingwithswift.com/how-to-use-userdefaults-suites-with-swift/

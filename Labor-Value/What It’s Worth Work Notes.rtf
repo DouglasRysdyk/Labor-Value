@@ -16,6 +16,10 @@
 \
 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
 \ul TODO:\ulnone   \
+- Calculation model should only return the smallest answer.  \
+  - How do I figure out what unit of time it is?  \
+    - By returning what conversion it got up to.  That gets passed to somewhere in the MainViewController to display the correct unit of time and the correct length of time.  \
+\
 Fix the units of time result label: \
 - Add a function that loops through the conversions from hours till it finds the smallest option.  \
 - I'm keeping the hour conversion because by default people's labor value will be displayed as hourly.  I think keeping it this way will save me a step.  \
