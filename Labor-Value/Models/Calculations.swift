@@ -10,36 +10,33 @@ import Foundation
 class Calculations {
     //Adds all of the user's entries together into one pile.
     var accumulator = 0.0
+    var originalAccumulatorValue = 0.0
     
     //MARK: WORKING ON
     func calculateLaborValue(itemPrice: Double, userIncome: Double) -> Double {
         accumulator = itemPrice / userIncome
+        originalAccumulatorValue = accumulator //Save the accumulator in case I overwrite it.
+        
+        //do the calculation for each conversion and then compare conversions until we find the smallest option that is NOT zero.
         /*
-        //For every calculation do one calculation and save that number IF it is smaller than the last, but not 0.
-        //Need a finalValue variable
-        //Need a holdOver variable
-        for _/*want a name for this*/ in 0...6 {
-            //Hourly wage to labor seconds
-            workHoursToSeconds(hoursToWork: accumulator)
-            
-            //Hourly wage to labor minutes
-            workHoursToMinutes(hoursToWork: accumulator)
-            
-            //Hourly wage to labor hours
-            
-            //Hourly wage to labor days
-            workHoursToDays(hoursToWork: accumulator)
-            
-            //Hourly wage to labor weeks
-            workHoursToWeeks(hoursToWork: accumulator)
-            
-            //Hourly wage to labor months
-            workHoursToMonths(hoursToWork: accumulator)
-            
-            //Hourly wage to labor years
-            workHoursToYears(hoursToWork: accumulator)
+         //NOT WORKING FIRST ATTEMPT WILL TRY AGAIN AFTER I GET RID OF THE CONSTRAINT ERRORS 
+        if (workHoursToSeconds(hoursToWork: accumulator) < workHoursToMinutes(hoursToWork: accumulator) && workHoursToSeconds(hoursToWork: accumulator) != 0.0) {
+            return workHoursToSeconds(hoursToWork: accumulator)
+        } else if (workHoursToMinutes(hoursToWork: accumulator) < originalAccumulatorValue && workHoursToMinutes(hoursToWork: accumulator) != 0.0) {
+            return workHoursToMinutes(hoursToWork: accumulator)
+        } else if (originalAccumulatorValue < workHoursToDays(hoursToWork: accumulator) && originalAccumulatorValue != 0.0) {
+            return originalAccumulatorValue
+        } else if (workHoursToDays(hoursToWork: accumulator) < workHoursToWeeks(hoursToWork: accumulator) && workHoursToDays(hoursToWork: accumulator) != 0.0) {
+            return workHoursToDays(hoursToWork: accumulator)
+        } else if (workHoursToWeeks(hoursToWork: accumulator) < workHoursToMonths(hoursToWork: accumulator) && workHoursToWeeks(hoursToWork: accumulator) != 0.0) {
+            return workHoursToWeeks(hoursToWork: accumulator)
+        } else if (workHoursToMonths(hoursToWork: accumulator) < workHoursToYears(hoursToWork: accumulator) && workHoursToMonths(hoursToWork: accumulator) != 0.0) {
+            return workHoursToMonths(hoursToWork: accumulator)
+        } else {
+            return workHoursToYears(hoursToWork: accumulator)
         }
         */
+        
         //Commented out because I know this works and this is getting distracting.  Keeping in case I need to bug fix.  
 //        print("TEST: totalItems = ", accumulator)
         

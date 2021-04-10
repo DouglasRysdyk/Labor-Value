@@ -11,8 +11,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     let theCalculationsModel = Calculations()
     let savedUserIncomeSuiteDefault = UserDefaultsManager()
     
-    let unitOfTimePickerViewData = ["Seconds", "Minutes", "Hours", "Days", "Weeks", "Months", "Years"]
-    
     @IBOutlet weak var incomeTextField: UITextField! {
         didSet {
             incomeTextField?.doneButtonTapped()
@@ -84,6 +82,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     //Do the calculation if the user changes their income.
     //Editing Changed IBAction
     @IBAction func incomeTextFieldEditingChanged(_ sender: Any) {
+        //MARK: WORKING ON
         theCalculationString = calculateHourlyLaborValue()
         
         //MARK: This is defaulted to hours I need to convert to whatever the proper unit of time is.
@@ -104,6 +103,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         //MARK: WORKING ON
         theCalculationString = calculateHourlyLaborValue()
         
+        //MARK: This is defaulted to hours I need to convert to whatever the proper unit of time is.
         let theUnitOfTime = theCalculationString == "1" ? "hour" : "hours"
         
         if theCalculationString == "nan" || theCalculationString == "inf" {
