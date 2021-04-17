@@ -10,40 +10,36 @@ import Foundation
 class Calculations {
     //Adds all of the user's entries together into one pile.
     var accumulator = 0.0
-    var originalAccumulatorValue = 0.0
+    var workHoursConversionsArray: [Double] = []
+    var eachIndex = 0
+    var theUnitOfTime = ""
     
-    //MARK: WORKING ON
-    func calculateLaborValue(itemPrice: Double, userIncome: Double) -> Double {
-        accumulator = itemPrice / userIncome
-        originalAccumulatorValue = accumulator //Save the accumulator in case I overwrite it.
+    func calculateTheLaborValue(itemPrice: Double, userIncome: Double) -> Double {
+        workHoursConversionsArray = [
+            laborValueInYears(itemPrice: itemPrice, userIncome: userIncome),   //0
+            laborValueInMonths(itemPrice: itemPrice, userIncome: userIncome),  //1
+            laborValueInWeeks(itemPrice: itemPrice, userIncome: userIncome),   //2
+            laborValueInDays(itemPrice: itemPrice, userIncome: userIncome),    //3
+            laborValueInHours(itemPrice: itemPrice, userIncome: userIncome),   //4
+            laborValueInMinutes(itemPrice: itemPrice, userIncome: userIncome), //5
+            laborValueInSeconds(itemPrice: itemPrice, userIncome: userIncome)  //6
+        ]
         
-        //do the calculation for each conversion and then compare conversions until we find the smallest option that is NOT zero.
-        /*
-         //NOT WORKING FIRST ATTEMPT WILL TRY AGAIN AFTER I GET RID OF THE CONSTRAINT ERRORS 
-        if (workHoursToSeconds(hoursToWork: accumulator) < workHoursToMinutes(hoursToWork: accumulator) && workHoursToSeconds(hoursToWork: accumulator) != 0.0) {
-            return workHoursToSeconds(hoursToWork: accumulator)
-        } else if (workHoursToMinutes(hoursToWork: accumulator) < originalAccumulatorValue && workHoursToMinutes(hoursToWork: accumulator) != 0.0) {
-            return workHoursToMinutes(hoursToWork: accumulator)
-        } else if (originalAccumulatorValue < workHoursToDays(hoursToWork: accumulator) && originalAccumulatorValue != 0.0) {
-            return originalAccumulatorValue
-        } else if (workHoursToDays(hoursToWork: accumulator) < workHoursToWeeks(hoursToWork: accumulator) && workHoursToDays(hoursToWork: accumulator) != 0.0) {
-            return workHoursToDays(hoursToWork: accumulator)
-        } else if (workHoursToWeeks(hoursToWork: accumulator) < workHoursToMonths(hoursToWork: accumulator) && workHoursToWeeks(hoursToWork: accumulator) != 0.0) {
-            return workHoursToWeeks(hoursToWork: accumulator)
-        } else if (workHoursToMonths(hoursToWork: accumulator) < workHoursToYears(hoursToWork: accumulator) && workHoursToMonths(hoursToWork: accumulator) != 0.0) {
-            return workHoursToMonths(hoursToWork: accumulator)
-        } else {
-            return workHoursToYears(hoursToWork: accumulator)
+        for eachIndex in 0..<workHoursConversionsArray.count {
+            if workHoursConversionsArray[eachIndex] >= 1 {
+                theUnitOfTime = findTheUnitOfTime(theIndex: eachIndex)
+                return workHoursConversionsArray[eachIndex]
+            }
         }
-        */
         
         //Commented out because I know this works and this is getting distracting.  Keeping in case I need to bug fix.  
-//        print("TEST: totalItems = ", accumulator)
+        //print("TEST: totalItems = ", accumulator)
         
         //Returns the final value
         return accumulator
     }
     
+    //MARK: Unchanged, may not work.  
     //Binary operation for adding multiple items.
     func addMultipleItemPrices(newEntry: Double, currentTotal: Double) -> Double {
         print("Before adding an item", accumulator)
@@ -55,6 +51,7 @@ class Calculations {
         return accumulator
     }
     
+    //MARK: Unchanged, may not work.
     //Binary operation for removing multiple items.
     func removeMultipleItemPrices(newEntry: Double, currentTotal: Double) -> Double {
         print("Before removing an item", accumulator)
@@ -66,61 +63,105 @@ class Calculations {
         return accumulator
     }
     
-    /* TODO:
-     - Set up UI in the MainView to allow for adding multiple items.
-       - Set up a tableview with the user's item history.
-       - Set up the ability to remove an item from the user's history.
-         - I will need another function for removing an item from the current total.  The number will come from the index path.
-     - Write a binary operation function for subtracting from the total number of items.
-     */
-    
-    //MARK: Functions for converting from labor hours to minutes, days, etc.
-    func workHoursToSeconds(hoursToWork: Double) -> Double {
+    //TODO: Try -> Int instead.  May streamline things.
+    func laborValueInSeconds(itemPrice: Double, userIncome: Double) -> Double {
         let secondsInAnHour = 3600.0
         
-        let hoursToSecondsResult: Double = hoursToWork * secondsInAnHour
+        let incomeToSecondsResult: Double = userIncome / secondsInAnHour
         
-        return hoursToSecondsResult
+        accumulator = itemPrice / incomeToSecondsResult
+        
+        return accumulator
     }
     
-    func workHoursToMinutes(hoursToWork: Double) -> Double {
+    func laborValueInMinutes(itemPrice: Double, userIncome: Double) -> Double {
         let minutesInAnHour = 60.0
         
-        let hoursToMinutesResult: Double = hoursToWork * minutesInAnHour
+        let incomeToMinutesResult: Double = userIncome / minutesInAnHour
         
-        return hoursToMinutesResult
+        accumulator = itemPrice / incomeToMinutesResult
+        
+        return accumulator
     }
     
-    func workHoursToDays(hoursToWork: Double) -> Double {
+    //MARK: I think it's skipping this.
+    func laborValueInHours(itemPrice: Double, userIncome: Double) -> Double {
+        accumulator = itemPrice / userIncome
+        
+        return accumulator
+    }
+    
+    func laborValueInDays(itemPrice: Double, userIncome: Double) -> Double {
         let hoursInADay = 24.0
         
-        let hoursToDaysResult: Double = hoursToWork / hoursInADay
+        let incomeToDaysResult: Double = userIncome * hoursInADay
         
-        return hoursToDaysResult
+        accumulator = itemPrice / incomeToDaysResult
+        
+        return accumulator
     }
     
-    func workHoursToWeeks(hoursToWork: Double) -> Double {
+    func laborValueInWeeks(itemPrice: Double, userIncome: Double) -> Double {
         let hoursInAWeek = 168.0
         
-        let hoursToWeeksResult: Double = hoursToWork / hoursInAWeek
+        let incomeToWeeksResult: Double = userIncome * hoursInAWeek
         
-        return hoursToWeeksResult
+        accumulator = itemPrice / incomeToWeeksResult
+        
+        return accumulator
     }
     
-    func workHoursToMonths(hoursToWork: Double) -> Double {
+    func laborValueInMonths(itemPrice: Double, userIncome: Double) -> Double {
         let hoursInAMonth = 730.5
         
-        let hoursToMonthsResult: Double = hoursToWork / hoursInAMonth
+        let incomeToMonthsResult: Double = userIncome * hoursInAMonth
         
-        return hoursToMonthsResult
+        accumulator = itemPrice / incomeToMonthsResult
+        
+        return accumulator
     }
     
-    func workHoursToYears(hoursToWork: Double) -> Double {
+    func laborValueInYears(itemPrice: Double, userIncome: Double) -> Double {
         let hoursInAYear = 8766.0
         
-        let hoursToYearsResult: Double = hoursToWork / hoursInAYear
+        let incomeToYearsResult: Double = userIncome * hoursInAYear
         
-        return hoursToYearsResult
+        accumulator = itemPrice / incomeToYearsResult
+        
+        return accumulator
+    }
+    
+    //Stop this If Else stuff.  Default is singular (year, minute, etc.) and just add an S if it's greater than 1.  
+    func findTheUnitOfTime(theIndex: Int) -> String {
+        var theIndexUnitOfTime = ""
+        
+        switch theIndex {
+        case 0:
+            print("year accumulator = ", accumulator)
+            theIndexUnitOfTime = "year"
+        case 1:
+            print("month accumulator = ", accumulator)
+            theIndexUnitOfTime = "month"
+        case 2:
+            print("week accumulator = ", accumulator)
+            theIndexUnitOfTime = "week"
+        case 3:
+            print("day accumulator = ", accumulator)
+            theIndexUnitOfTime = "day"
+        case 4:
+            print("hour accumulator = ", accumulator)
+            theIndexUnitOfTime = "hour"
+        case 5:
+            print("minute accumulator = ", accumulator)
+            theIndexUnitOfTime = "minute"
+        case 6:
+            print("second accumulator = ", accumulator)
+            theIndexUnitOfTime = "second"
+        default:
+            theIndexUnitOfTime = "ERROR"
+        }
+        
+        return theIndexUnitOfTime
     }
 }
 

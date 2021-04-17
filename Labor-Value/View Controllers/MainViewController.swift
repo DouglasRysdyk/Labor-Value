@@ -32,7 +32,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     var originalItemPriceText = ""
 
     var theCalculationString = ""
-    var theUnitOfTime = ""
     
     //Load the view.  
     override func viewDidLoad() {
@@ -50,6 +49,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
             print("User defaults is empty.")
         }
         
+        //What does this do?
         theResult.text = theCalculationString
         
         hideKeyboardWhenTappedAround()
@@ -85,13 +85,18 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         //MARK: WORKING ON
         theCalculationString = calculateHourlyLaborValue()
         
-        //MARK: This is defaulted to hours I need to convert to whatever the proper unit of time is.
-        let theUnitOfTime = theCalculationString == "1" ? "hour" : "hours"
-    
-        if theCalculationString == "nan" || theCalculationString == "inf" {
+        //MARK: THE PROBLEM: This is defaulted to hours I need to convert to whatever the proper unit of time is.
+//        let theUnitOfTime = theCalculationString == "1" ? theCalculationsModel.theUnitOfTime : theCalculationsModel.theUnitOfTime + "s"
+//        let theUnitOfTime = theCalculationString == "1" ? "hour" : "hours"
+        let theUnitOfTime = theCalculationsModel.theUnitOfTime
+        
+        //Hide the result sentence if the user's entry is in some way invalid.  
+        if theCalculationString == "nan" || theCalculationString == "inf" || theUnitOfTime == "" {
             theResult.text = ""
         } else {
-            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
+            if theCalculationString != "1" {
+                theResult.text = "It would take \(theCalculationString) \(theUnitOfTime + "s") to pay for this."
+            }
         }
     }
     
@@ -103,13 +108,18 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         //MARK: WORKING ON
         theCalculationString = calculateHourlyLaborValue()
         
-        //MARK: This is defaulted to hours I need to convert to whatever the proper unit of time is.
-        let theUnitOfTime = theCalculationString == "1" ? "hour" : "hours"
+        //MARK: THE PROBLEM: This is defaulted to hours I need to convert to whatever the proper unit of time is.
+//        let theUnitOfTime = theCalculationString == "1" ? theCalculationsModel.theUnitOfTime : theCalculationsModel.theUnitOfTime + "s"
+//        let theUnitOfTime = theCalculationString == "1" ? "hour" : "hours"
+        let theUnitOfTime = theCalculationsModel.theUnitOfTime
         
-        if theCalculationString == "nan" || theCalculationString == "inf" {
+        //Hide the result sentence if the user's entry is in some way invalid.
+        if theCalculationString == "nan" || theCalculationString == "inf" || theUnitOfTime == "" {
             theResult.text = ""
         } else {
-            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
+            if theCalculationString != "1" {
+                theResult.text = "It would take \(theCalculationString) \(theUnitOfTime + "s") to pay for this."
+            }
         }
     }
     
@@ -132,68 +142,6 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         
         //Make the result label disappear.
         theResult.text = ""
-    }
-    
-    //MARK: WORKING ON
-    func unitOfTimeConversion(unitOfTime: String) {
-        switch unitOfTime {
-        case "Seconds":
-            theCalculationString = String(format: "%.0f", theCalculationsModel.workHoursToSeconds(hoursToWork: theCalculationsModel.accumulator))
-            
-            let theUnitOfTime = theCalculationString == "1" ? "second" : "seconds"
-            
-            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
-            break
-        case "Minutes":
-            theCalculationString = String(format: "%.0f", theCalculationsModel.workHoursToMinutes(hoursToWork: theCalculationsModel.accumulator))
-            
-            let theUnitOfTime = theCalculationString == "1" ? "minute" : "minutes"
-            
-            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
-            break
-        case "Hours":
-            theCalculationString = calculateHourlyLaborValue()
-            
-            let theUnitOfTime = theCalculationString == "1" ? "hour" : "hours"
-            
-            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
-            break
-        case "Days":
-            theCalculationString = String(format: "%.0f", theCalculationsModel.workHoursToDays(hoursToWork: theCalculationsModel.accumulator))
-            
-            let theUnitOfTime = theCalculationString == "1" ? "day" : "days"
-            
-            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
-            break
-        case "Weeks":
-            theCalculationString = String(format: "%.0f", theCalculationsModel.workHoursToWeeks(hoursToWork: theCalculationsModel.accumulator))
-            
-            let theUnitOfTime = theCalculationString == "1" ? "week" : "weeks"
-            
-            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
-            break
-        case "Months":
-            theCalculationString = String(format: "%.0f", theCalculationsModel.workHoursToMonths(hoursToWork: theCalculationsModel.accumulator))
-            
-            let theUnitOfTime = theCalculationString == "1" ? "month" : "months"
-            
-            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
-            break
-        case "Years":
-            theCalculationString = String(format: "%.0f", theCalculationsModel.workHoursToYears(hoursToWork: theCalculationsModel.accumulator))
-            
-            let theUnitOfTime = theCalculationString == "1" ? "year" : "years"
-            
-            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
-            break
-        default:
-            //By default run the "Hours" case
-            theCalculationString = calculateHourlyLaborValue()
-            
-            let theUnitOfTime = theCalculationString == "1" ? "hour" : "hours"
-            
-            theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
-        }
     }
     
     @objc func cancelButtonTappedIncomeTextField() {
@@ -219,7 +167,7 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         //MARK: Change in theCalculationModel.
         //Convert the result to a String for theResult label.
         //TODO: Make anything less than 0 human legible (like say "it's less than half an hour" or something).
-        theCalculationString = String(format: "%.0f", theCalculationsModel.calculateLaborValue(itemPrice: theItemPrice, userIncome: theIncome))
+        theCalculationString = String(format: "%.0f", theCalculationsModel.calculateTheLaborValue(itemPrice: theItemPrice, userIncome: theIncome))
     
         return theCalculationString
     }

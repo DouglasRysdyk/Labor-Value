@@ -13,9 +13,22 @@
 \f1\b0 \ulnone  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
 \cf0 \ul Commit:\ulnone   \
-\
+theUnitOfTime is now determined completely in the Calculations model.  \
+I deleted everything having to do with determining theUnitOfTime in the MainViewController.  No conversions or anything.  \
+I rewrote the Calculations model to handle showing the longest unit of time as the smallest number.  \
+- EG. 1 year as opposed to 12 months.  1 hour as opposed to 60 minutes, or 0 years.  \
+I added a Switch to the Calculations model that figures out what unit of time is being used depending on the index that's called.  \
+I changed the way the S is added to plural sentences (minutes instead of minute for example) in the MainViewController.  By default the unit of time indicators are singular (EG minute), but if the calculation is not "1" an S is concatenated to the end of the unit of time String.  \
+Now why tf does working for 1 hour to buy something worth $1 not equal 1 hour's worth of work?  \
 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
 \ul TODO:\ulnone   \
+- Do not use separate functions or at least rewrite them.  \
+  - Calculating for hourly is confusing and may be causing problems.  \
+- Use the Switch method from before \
+- Compare the old accumulator value to the new accumulator value.  \
+- If the new value is less than or equal to the old accumulator value overwrite the old value.  \
+  - HOWEVER if the new value is ZERO keep the old value.  \
+\
 - Calculation model should only return the smallest answer.  \
   - How do I figure out what unit of time it is?  \
     - By returning what conversion it got up to.  It can simply be a string.  That gets passed to somewhere in the MainViewController to display the correct unit of time and the correct length of time.  \
