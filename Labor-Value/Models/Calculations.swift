@@ -39,6 +39,32 @@ class Calculations {
         //Returns the final value
         return accumulator
     }
+    
+    /* //Currently unused.
+       //MARK: Unchanged, may not work.
+       //Binary operation for adding multiple items.
+       func addMultipleItemPrices(newEntry: Double, currentTotal: Double) -> Double {
+           print("Before adding an item", accumulator)
+           
+           accumulator = newEntry + currentTotal
+           
+           print("After adding an item", accumulator)
+           
+           return accumulator
+       }
+       
+       //MARK: Unchanged, may not work.
+       //Binary operation for removing multiple items.
+       func removeMultipleItemPrices(newEntry: Double, currentTotal: Double) -> Double {
+           print("Before removing an item", accumulator)
+           
+           accumulator = newEntry - currentTotal
+           
+           print("After removing an item", accumulator)
+           
+           return accumulator
+       }
+   */
  
     func laborValueInSeconds(itemPrice: Double, userIncome: Double) -> Double {
         let secondsInAnHour = 3600.0
