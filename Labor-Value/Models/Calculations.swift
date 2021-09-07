@@ -13,7 +13,7 @@ class Calculations {
     var workHoursConversionsArray: [Double] = []
     var eachIndex = 0
     var theUnitOfTime = ""
-    
+
     func calculateTheLaborValue(itemPrice: Double, userIncome: Double) -> Double {
         workHoursConversionsArray = [
             laborValueInYears(itemPrice: itemPrice, userIncome: userIncome),   //0
@@ -28,42 +28,18 @@ class Calculations {
         for eachIndex in 0..<workHoursConversionsArray.count {
             if workHoursConversionsArray[eachIndex] >= 1 {
                 theUnitOfTime = findTheUnitOfTime(theIndex: eachIndex)
+                print(workHoursConversionsArray[eachIndex])
                 return workHoursConversionsArray[eachIndex]
             }
         }
         
         //Commented out because I know this works and this is getting distracting.  Keeping in case I need to bug fix.  
-        //print("TEST: totalItems = ", accumulator)
+        //print("TEST: totalItems =", accumulator)
         
         //Returns the final value
         return accumulator
     }
-    
-    //MARK: Unchanged, may not work.  
-    //Binary operation for adding multiple items.
-    func addMultipleItemPrices(newEntry: Double, currentTotal: Double) -> Double {
-        print("Before adding an item", accumulator)
-        
-        accumulator = newEntry + currentTotal
-        
-        print("After adding an item", accumulator)
-        
-        return accumulator
-    }
-    
-    //MARK: Unchanged, may not work.
-    //Binary operation for removing multiple items.
-    func removeMultipleItemPrices(newEntry: Double, currentTotal: Double) -> Double {
-        print("Before removing an item", accumulator)
-        
-        accumulator = newEntry - currentTotal
-        
-        print("After removing an item", accumulator)
-        
-        return accumulator
-    }
-    
-    //TODO: Try -> Int instead.  May streamline things.
+ 
     func laborValueInSeconds(itemPrice: Double, userIncome: Double) -> Double {
         let secondsInAnHour = 3600.0
         
@@ -84,7 +60,6 @@ class Calculations {
         return accumulator
     }
     
-    //MARK: I think it's skipping this.
     func laborValueInHours(itemPrice: Double, userIncome: Double) -> Double {
         accumulator = itemPrice / userIncome
         
@@ -131,32 +106,38 @@ class Calculations {
         return accumulator
     }
     
-    //Stop this If Else stuff.  Default is singular (year, minute, etc.) and just add an S if it's greater than 1.  
     func findTheUnitOfTime(theIndex: Int) -> String {
         var theIndexUnitOfTime = ""
         
         switch theIndex {
         case 0:
-            print("year accumulator = ", accumulator)
+            print("year accumulator =", accumulator)
             theIndexUnitOfTime = "year"
+            break
         case 1:
-            print("month accumulator = ", accumulator)
+            print("month accumulator =", accumulator)
             theIndexUnitOfTime = "month"
+            break
         case 2:
-            print("week accumulator = ", accumulator)
+            print("week accumulator =", accumulator)
             theIndexUnitOfTime = "week"
+            break
         case 3:
-            print("day accumulator = ", accumulator)
+            print("day accumulator =", accumulator)
             theIndexUnitOfTime = "day"
+            break
         case 4:
-            print("hour accumulator = ", accumulator)
+            print("hour accumulator =", accumulator)
             theIndexUnitOfTime = "hour"
+            break
         case 5:
-            print("minute accumulator = ", accumulator)
+            print("minute accumulator =", accumulator)
             theIndexUnitOfTime = "minute"
+            break
         case 6:
-            print("second accumulator = ", accumulator)
+            print("second accumulator =", accumulator)
             theIndexUnitOfTime = "second"
+            break
         default:
             theIndexUnitOfTime = "ERROR"
         }

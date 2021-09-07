@@ -78,24 +78,25 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         UserDefaultsManager.shared.savedUserIncomeSuiteDefault?.setValue(incomeTextField.text, forKey: "userIncome")
     }
     
-    //MARK: WORKING ON
     //Do the calculation if the user changes their income.
     //Editing Changed IBAction
     @IBAction func incomeTextFieldEditingChanged(_ sender: Any) {
-        //MARK: WORKING ON
         theCalculationString = calculateHourlyLaborValue()
         
-        //MARK: THE PROBLEM: This is defaulted to hours I need to convert to whatever the proper unit of time is.
-//        let theUnitOfTime = theCalculationString == "1" ? theCalculationsModel.theUnitOfTime : theCalculationsModel.theUnitOfTime + "s"
-//        let theUnitOfTime = theCalculationString == "1" ? "hour" : "hours"
         let theUnitOfTime = theCalculationsModel.theUnitOfTime
         
         //Hide the result sentence if the user's entry is in some way invalid.  
-        if theCalculationString == "nan" || theCalculationString == "inf" || theUnitOfTime == "" {
+        if theCalculationString == "nan" ||
+            theCalculationString == "inf" ||
+            theUnitOfTime == "" ||
+            incomeTextField.text == "" ||
+            itemPriceTextField.text == "" {
             theResult.text = ""
         } else {
             if theCalculationString != "1" {
                 theResult.text = "It would take \(theCalculationString) \(theUnitOfTime + "s") to pay for this."
+            } else if theCalculationString == "1" {
+                theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
             }
         }
     }
@@ -105,20 +106,22 @@ class MainViewController: UIViewController, UITextFieldDelegate {
     @IBAction func itemPriceTextFieldEditingChanged(_ sender: UITextField) {
         //Editing Changed Source -- https://youtu.be/XUH1O1BTUvo?t=100 till 6:26
         
-        //MARK: WORKING ON
         theCalculationString = calculateHourlyLaborValue()
         
-        //MARK: THE PROBLEM: This is defaulted to hours I need to convert to whatever the proper unit of time is.
-//        let theUnitOfTime = theCalculationString == "1" ? theCalculationsModel.theUnitOfTime : theCalculationsModel.theUnitOfTime + "s"
-//        let theUnitOfTime = theCalculationString == "1" ? "hour" : "hours"
         let theUnitOfTime = theCalculationsModel.theUnitOfTime
         
         //Hide the result sentence if the user's entry is in some way invalid.
-        if theCalculationString == "nan" || theCalculationString == "inf" || theUnitOfTime == "" {
+        if theCalculationString == "nan" ||
+            theCalculationString == "inf" ||
+            theUnitOfTime == "" ||
+            incomeTextField.text == "" ||
+            itemPriceTextField.text == "" {
             theResult.text = ""
         } else {
             if theCalculationString != "1" {
                 theResult.text = "It would take \(theCalculationString) \(theUnitOfTime + "s") to pay for this."
+            } else if theCalculationString == "1" {
+                theResult.text = "It would take \(theCalculationString) \(theUnitOfTime) to pay for this."
             }
         }
     }
@@ -156,15 +159,11 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         itemPriceTextField.resignFirstResponder()
     }
     
-    //MARK: Need to convert from this result to
-     //Alternatively I can use maybe a For Loop to figure out which answers are too low.
-     //Will prolly need to change the name of this and anything else that references the "hourly" labor value specifically.  
     func calculateHourlyLaborValue() -> String {
         //Convert the textfield text to doubles.
         let theItemPrice = Double(itemPriceTextField.text ?? "0") ?? 0.0
         let theIncome = Double(incomeTextField.text ?? "0") ?? 0.0
     
-        //MARK: Change in theCalculationModel.
         //Convert the result to a String for theResult label.
         //TODO: Make anything less than 0 human legible (like say "it's less than half an hour" or something).
         theCalculationString = String(format: "%.0f", theCalculationsModel.calculateTheLaborValue(itemPrice: theItemPrice, userIncome: theIncome))

@@ -1,4 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2578
+{\rtf1\ansi\ansicpg1252\cocoartf2580
 \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Menlo-Bold;
 \f3\fswiss\fcharset0 Helvetica-BoldOblique;}
 {\colortbl;\red255\green255\blue255;\red255\green255\blue255;\red255\green255\blue255;\red31\green31\blue36;
@@ -13,56 +13,28 @@
 \f1\b0 \ulnone  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
 \cf0 \ul Commit:\ulnone   \
-theUnitOfTime is now determined completely in the Calculations model.  \
-I deleted everything having to do with determining theUnitOfTime in the MainViewController.  No conversions or anything.  \
-I rewrote the Calculations model to handle showing the longest unit of time as the smallest number.  \
-- EG. 1 year as opposed to 12 months.  1 hour as opposed to 60 minutes, or 0 years.  \
-I added a Switch to the Calculations model that figures out what unit of time is being used depending on the index that's called.  \
-I changed the way the S is added to plural sentences (minutes instead of minute for example) in the MainViewController.  By default the unit of time indicators are singular (EG minute), but if the calculation is not "1" an S is concatenated to the end of the unit of time String.  \
-Now why tf does working for 1 hour to buy something worth $1 not equal 1 hour's worth of work?  \
+Added two more caveats to the incomeTextField and itemPriceTextField that prevent the result text appearing when either textfield is empty.  \
+Deleting comments from the last commit in the incomeTextField and itemPriceTextField.  \
 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
 \ul TODO:\ulnone   \
-- Do not use separate functions or at least rewrite them.  \
-  - Calculating for hourly is confusing and may be causing problems.  \
-- Use the Switch method from before \
-- Compare the old accumulator value to the new accumulator value.  \
-- If the new value is less than or equal to the old accumulator value overwrite the old value.  \
-  - HOWEVER if the new value is ZERO keep the old value.  \
-\
-- Calculation model should only return the smallest answer.  \
-  - How do I figure out what unit of time it is?  \
-    - By returning what conversion it got up to.  It can simply be a string.  That gets passed to somewhere in the MainViewController to display the correct unit of time and the correct length of time.  \
-  - I already have a switch set up that is ready to handle converting theUnitOfTime from hours to other unitsOfTime and from plural to singular.  \
-\
-Fix the units of time result label: \
-- Add a function that loops through the conversions from hours till it finds the smallest option.  \
-- I'm keeping the hour conversion because by default people's labor value will be displayed as hourly.  I think keeping it this way will save me a step.  \
-- We're looking for the smallest number that is not zero.  \
-  - So if I'm paid $15.50 and I want to buy a $1,000 item then it will take 3 days at least.  Everything else is either zero or a much larger number.  \
-- Loop through and do each calculation.  Compare each answer to the last.  Save the smallest answer to a variable.  \
-\
-- 
-\f0\b If I'm understanding my code right I can just call the unitOfTimeConversion function right after the calculation is done
-\f1\b0 .  \
-  - This doesn't solve the logic problem which is how do I figure out the lowest unit of time.  \
-- Goal is for it to say something like "It will take you 10 minutes and 33 seconds to pay for this." \
-  - "It will take you 4 days and 6 hours to pay for this."  \
-  - "It will take you an hour and a half to pay for this."  \
-  - "It will take you half an hour to pay for this."  \
-  - "It will take you 3 hours and 43 minutes to pay for this."  \
-  - "It will take you one year to pay for this."  \
-- Use a switch statement.  \
-  - Feed it the calculation result.  \
-  - Use a series of cases to figure out what the result label should say.  \
-  - Reuse whatever UIPickerView code you want.  \
-- Other stuff: \
-  - Figure out a decent visual design.  \
-    - Probably keep white as the basis.   \
-  - Get rid of "$" placeholder text in the itemPriceTextField.  \
-  - Hitting cancel should reset the item price textfield.  \
-  - Get rid of the navigation view controller thing for now.  \
-    - Can add a button somewhere for donations or whatever.  \
-  - What happens when I type in ridiculously large numbers?  \
+Why does working for $1 an hour, and then buying something worth $1 not equal 1 hour's worth of work?  \
+- 15/15 = 1.  It should return 1 hour.  \
+  - The hour accumulator appears (good) and equals 3600.0 (I don't understand why).  \
+  - This equals something weird like 4 minutes.  \
+    - I know why this is: it's because it stops calculating after I type in the number 1.    \
+  - 3600 is the correct number of seconds in an hour, so why does it get hung up?  \
+  - There seems to be a problem when I type in $.30 as well.  \
+    - $.40 and $.20 work fine though.  \
+  - Other "1s" are not returned such as 1 second or 1 minute.  \
+    - Again the exact problem eludes me, and the fact 15/15 = 3600 says to me it primarily has something to do with the calculation.  \
+- Work: \
+  - I think this is the center of my problems.  \
+  - This loop goes through every function regardless of whether or not it should.        \
+  - It SHOULD stop when it finds the right answer, and most of the time it does.  However there are edge cases where it keeps going, and gets confused.        \
+  - I don't totally understand why it gets confused, but I know that this is only half of the result.  The final result is the sentence "It will take 2 hours to buy this."  This is just the number.  The other half works as intended, although any problems may be obscured by this.        \
+  - My best option, I think, is to use a switch instead of a for loop.  This way I still have something to call every time the textfield changes, and I can break out of the calculations when I get the right answer.\
+- I think this is barking up the wrong tree, but I never really used a modulo throughout this whole project.  Could looking just at the remainder help me anywhere?  \
+- \
 \
 More Polish: \
 - Read about designing human interfaces and how to get your app accepted onto the app store -- https://developer.apple.com/design/ \
@@ -121,6 +93,13 @@ Update Ideas:\
   - Is there someone who is an expert at this that I can ask?  \
 \
 Submit an app for review \'97 https://developer.apple.com/ios/submit/\
+\
+Labor Value Date & Time Stuff: \
+- https://www.globalnerdy.com/2020/05/28/how-to-work-with-dates-and-times-in-swift-5-part-4-adding-swift-syntactic-magic/ \
+- https://stackoverflow.com/questions/26794703/swift-integer-conversion-to-hours-minutes-seconds \
+- https://stackoverflow.com/questions/35215694/format-timer-label-to-hoursminutesseconds-in-swift/35215847 \
+- https://gist.github.com/atika/84f53267f3b3424e75db \
+- https://www.geeksforgeeks.org/converting-seconds-into-days-hours-minutes-and-seconds/ \
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------\
 Errors (01/26/2021): \
 \pard\tx593\pardeftab593\pardirnatural\partightenfactor0
