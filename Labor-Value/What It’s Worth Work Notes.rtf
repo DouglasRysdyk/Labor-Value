@@ -13,27 +13,31 @@
 \f1\b0 \ulnone  \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab709\pardirnatural\partightenfactor0
 \cf0 \ul Commit:\ulnone   \
-Added two more caveats to the incomeTextField and itemPriceTextField that prevent the result text appearing when either textfield is empty.  \
-Deleting comments from the last commit in the incomeTextField and itemPriceTextField.  \
+\
 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \'97 \
 \ul TODO:\ulnone   \
-Why does working for $1 an hour, and then buying something worth $1 not equal 1 hour's worth of work?  \
-- 15/15 = 1.  It should return 1 hour.  \
-  - The hour accumulator appears (good) and equals 3600.0 (I don't understand why).  \
-  - This equals something weird like 4 minutes.  \
-    - I know why this is: it's because it stops calculating after I type in the number 1.    \
-  - 3600 is the correct number of seconds in an hour, so why does it get hung up?  \
-  - There seems to be a problem when I type in $.30 as well.  \
-    - $.40 and $.20 work fine though.  \
-  - Other "1s" are not returned such as 1 second or 1 minute.  \
-    - Again the exact problem eludes me, and the fact 15/15 = 3600 says to me it primarily has something to do with the calculation.  \
-- Work: \
-  - I think this is the center of my problems.  \
-  - This loop goes through every function regardless of whether or not it should.        \
-  - It SHOULD stop when it finds the right answer, and most of the time it does.  However there are edge cases where it keeps going, and gets confused.        \
-  - I don't totally understand why it gets confused, but I know that this is only half of the result.  The final result is the sentence "It will take 2 hours to buy this."  This is just the number.  The other half works as intended, although any problems may be obscured by this.        \
-  - My best option, I think, is to use a switch instead of a for loop.  This way I still have something to call every time the textfield changes, and I can break out of the calculations when I get the right answer.\
-- I think this is barking up the wrong tree, but I never really used a modulo throughout this whole project.  Could looking just at the remainder help me anywhere?  \
+- Back up plan -- https://www.fiverr.com/nasrullahkhan93/do-auto-layout-in-iphone-ipad-app?context_referrer=search_gigs&source=top-bar&ref_ctx_id=6a1bdf1024fb00bf0d910168223b8311&pckg_id=1&pos=3&context_type=auto&funnel=b654bb0458db4bba8c3578d389047d19 \
+\
+AutoLayout: \
+- https://www.raywenderlich.com/5055364-ios-storyboards-getting-started \
+- 
+\f0\b https://www.youtube.com/watch?v=7sDvz8btyvk
+\f1\b0  \
+- https://www.youtube.com/watch?v=3y23UebzCYw \
+- https://www.youtube.com/watch?v=emojd8GFB0o \
+- https://www.youtube.com/watch?v=synofzEkUfU \
+- 
+\f0\b https://developer.apple.com/documentation/uikit/uistackview
+\f1\b0  \
+- 
+\f0\b https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/index.html
+\f1\b0  \
+- https://www.hackingwithswift.com/articles/140/the-auto-layout-cheat-sheet \
+- https://www.hackingwithswift.com/read/6/2/advanced-auto-layout \
+- https://www.youtube.com/watch?v=KkbLKYHDW0s \
+- Best practices -- https://www.google.com/search?client=firefox-b-1-d&q=swift+auto+layout+best+practices \
+  - https://medium.com/@NSomar/auto-layout-best-practices-for-minimum-pain-c130b2b1a0f6 \
+  - https://blog.supereasyapps.com/30-auto-layout-best-practices/#layout-ui-for-one-iphone \
 - \
 \
 More Polish: \
