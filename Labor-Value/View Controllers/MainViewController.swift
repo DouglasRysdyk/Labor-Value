@@ -40,6 +40,8 @@ class MainViewController: UIViewController, UITextFieldDelegate {
         self.incomeTextField.delegate = self
         self.itemPriceTextField.delegate = self
         
+        overrideUserInterfaceStyle = .light
+        
         //On load, set the incomeTextField.text to whatever value is saved in User Defaults.
         if let value = UserDefaultsManager.shared.savedUserIncomeSuiteDefault?.value(forKey: "userIncome") as? String {
             incomeTextField.text = value
